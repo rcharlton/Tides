@@ -1,210 +1,214 @@
 {
-  "disclaimer": "NOT SUITABLE FOR NAVIGATIONAL PURPOSES. Marea API does not warrant that the provided data will be free from errors or omissions. Provided data are NOT suitable for usage where someone could be harmed or suffer any damage.",
-  "status": 200,
-  "latitude": 25,
-  "longitude": -90,
-  "origin": {
-    "latitude": 21.3033,
-    "longitude": -89.6667,
-    "distance": 410.815858,
-    "unit": "km",
-    "station": {
-      "id": "TICON:71ba67f174",
-      "name": "Progreso-C, Yuc., Mexico",
-      "provider": "Univ. Hawaii Sea Level Center (UHSLC)"
-    }
-  },
-  "datums": {
-    "LAT": -0.653,
-    "HAT": 0.437,
-    "MLLW": -0.271,
-    "MHHW": 0.214,
-    "MHW": 0.183,
-    "MLW": -0.209,
-    "MTL": -0.013,
-    "DTL": -0.029,
-    "GT": 0.485,
-    "MN": 0.393,
-    "DHQ": 0.031,
-    "DLQ": 0.062
-  },
-  "timestamp": 1633451190,
-  "datetime": "2021-10-05T16:26:30+00:00",
-  "unit": "m",
-  "timezone": "UTC",
-  "datum": "MSL",
-  "extremes": [
-    {
-      "timestamp": 1633459448,
-      "datetime": "2021-10-05T18:44:08+00:00",
-      "height": 0.17,
-      "state": "HIGH TIDE"
+    "disclaimer": "NOT SUITABLE FOR NAVIGATIONAL PURPOSES. Marea API does not warrant that the provided data will be free from errors or omissions. Provided data are NOT suitable for usage where someone could be harmed or suffer any damage.",
+    "status": 200,
+    "latitude": 38.0433,
+    "longitude": -121.918,
+    "origin": {
+        "latitude": 38.0433,
+        "longitude": -121.918,
+        "distance": 0,
+        "unit": "km",
+        "station": {
+            "id": "NOAA:9415112",
+            "name": "Mallard Island, Suisun Bay",
+            "provider": "National Oceanic and Atmospheric Administration (NOAA)"
+        }
     },
-    {
-      "timestamp": 1633489699,
-      "datetime": "2021-10-06T03:08:19+00:00",
-      "height": -0.079,
-      "state": "LOW TIDE"
+    "datums": {
+        "MHHW": 0.636,
+        "MHW": 0.485,
+        "MTL": -0.007,
+        "DTL": -0.035,
+        "MLW": -0.5,
+        "MLLW": -0.707,
+        "STND": -1.687,
+        "GT": 1.343,
+        "MN": 0.986,
+        "DHQ": 0.151,
+        "DLQ": 0.206,
+        "HWI": 10.73,
+        "LWI": 4.63,
+        "LAT": -1.007,
+        "HAT": 0.907,
+        "MSL": 0
     },
-    {
-      "timestamp": 1633510191,
-      "datetime": "2021-10-06T08:49:51+00:00",
-      "height": 0.083,
-      "state": "HIGH TIDE"
-    },
-    {
-      "timestamp": 1633527472,
-      "datetime": "2021-10-06T13:37:52+00:00",
-      "height": -0.005,
-      "state": "LOW TIDE"
-    }
-  ],
-  "heights": [
-    {
-      "timestamp": 1633451190,
-      "datetime": "2021-10-05T16:26:30+00:00",
-      "height": 0.132,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633454790,
-      "datetime": "2021-10-05T17:26:30+00:00",
-      "height": 0.156,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633458390,
-      "datetime": "2021-10-05T18:26:30+00:00",
-      "height": 0.17,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633461990,
-      "datetime": "2021-10-05T19:26:30+00:00",
-      "height": 0.166,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633465590,
-      "datetime": "2021-10-05T20:26:30+00:00",
-      "height": 0.147,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633469190,
-      "datetime": "2021-10-05T21:26:30+00:00",
-      "height": 0.115,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633472790,
-      "datetime": "2021-10-05T22:26:30+00:00",
-      "height": 0.072,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633476390,
-      "datetime": "2021-10-05T23:26:30+00:00",
-      "height": 0.026,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633479990,
-      "datetime": "2021-10-06T00:26:30+00:00",
-      "height": -0.016,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633483590,
-      "datetime": "2021-10-06T01:26:30+00:00",
-      "height": -0.051,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633487190,
-      "datetime": "2021-10-06T02:26:30+00:00",
-      "height": -0.074,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633490790,
-      "datetime": "2021-10-06T03:26:30+00:00",
-      "height": -0.078,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633494390,
-      "datetime": "2021-10-06T04:26:30+00:00",
-      "height": -0.06,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633497990,
-      "datetime": "2021-10-06T05:26:30+00:00",
-      "height": -0.021,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633501590,
-      "datetime": "2021-10-06T06:26:30+00:00",
-      "height": 0.025,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633505190,
-      "datetime": "2021-10-06T07:26:30+00:00",
-      "height": 0.063,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633508790,
-      "datetime": "2021-10-06T08:26:30+00:00",
-      "height": 0.082,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633512390,
-      "datetime": "2021-10-06T09:26:30+00:00",
-      "height": 0.079,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633515990,
-      "datetime": "2021-10-06T10:26:30+00:00",
-      "height": 0.059,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633519590,
-      "datetime": "2021-10-06T11:26:30+00:00",
-      "height": 0.03,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633523190,
-      "datetime": "2021-10-06T12:26:30+00:00",
-      "height": 0.005,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633526790,
-      "datetime": "2021-10-06T13:26:30+00:00",
-      "height": -0.005,
-      "state": "FALLING"
-    },
-    {
-      "timestamp": 1633530390,
-      "datetime": "2021-10-06T14:26:30+00:00",
-      "height": 0,
-      "state": "RISING"
-    },
-    {
-      "timestamp": 1633533990,
-      "datetime": "2021-10-06T15:26:30+00:00",
-      "height": 0.021,
-      "state": "RISING"
-    }
-  ],
-  "source": "STATION",
-  "copyright": "©2021 Marea | Piccioni, Gaia; Dettmering, Denise; Bosch, Wolfgang; Seitz, Florian (2018): TICON: Tidal Constants based on GESLA sea-level records from globally distributed tide gauges (data). PANGAEA, https://doi.org/10.1594/PANGAEA.896587, Supplement to: Piccioni, G et al. (2019): TICON: TIdal CONstants based on GESLA sea‐level records from globally located tide gauges. Geoscience Data Journal, 6(2), 97-104, https://doi.org/10.1002/gdj3.72"
+    "timestamp": 1666194938,
+    "datetime": "2022-10-19T15:55:38+00:00",
+    "unit": "m",
+    "timezone": "UTC",
+    "datum": "MSL",
+    "extremes": [
+        {
+            "timestamp": 1666206264,
+            "height": 0.3347034058,
+            "state": "HIGH TIDE",
+            "datetime": "2022-10-19T19:04:24+00:00"
+        },
+        {
+            "timestamp": 1666224532,
+            "height": -0.1680308586,
+            "state": "LOW TIDE",
+            "datetime": "2022-10-20T00:08:52+00:00"
+        },
+        {
+            "timestamp": 1666243802,
+            "height": 0.4076333386,
+            "state": "HIGH TIDE",
+            "datetime": "2022-10-20T05:30:02+00:00"
+        },
+        {
+            "timestamp": 1666271931,
+            "height": -0.6511086424,
+            "state": "LOW TIDE",
+            "datetime": "2022-10-20T13:18:51+00:00"
+        }
+    ],
+    "heights": [
+        {
+            "timestamp": 1666194938,
+            "height": -0.1774547572,
+            "state": "RISING",
+            "datetime": "2022-10-19T15:55:38+00:00"
+        },
+        {
+            "timestamp": 1666198538,
+            "height": 0.0542384133,
+            "state": "RISING",
+            "datetime": "2022-10-19T16:55:38+00:00"
+        },
+        {
+            "timestamp": 1666202138,
+            "height": 0.2467361672,
+            "state": "RISING",
+            "datetime": "2022-10-19T17:55:38+00:00"
+        },
+        {
+            "timestamp": 1666205738,
+            "height": 0.3332401731,
+            "state": "RISING",
+            "datetime": "2022-10-19T18:55:38+00:00"
+        },
+        {
+            "timestamp": 1666209338,
+            "height": 0.2910623072,
+            "state": "FALLING",
+            "datetime": "2022-10-19T19:55:38+00:00"
+        },
+        {
+            "timestamp": 1666212938,
+            "height": 0.1656647193,
+            "state": "FALLING",
+            "datetime": "2022-10-19T20:55:38+00:00"
+        },
+        {
+            "timestamp": 1666216538,
+            "height": 0.0216121784,
+            "state": "FALLING",
+            "datetime": "2022-10-19T21:55:38+00:00"
+        },
+        {
+            "timestamp": 1666220138,
+            "height": -0.1001307345,
+            "state": "FALLING",
+            "datetime": "2022-10-19T22:55:38+00:00"
+        },
+        {
+            "timestamp": 1666223738,
+            "height": -0.1654187558,
+            "state": "FALLING",
+            "datetime": "2022-10-19T23:55:38+00:00"
+        },
+        {
+            "timestamp": 1666227338,
+            "height": -0.1343776963,
+            "state": "RISING",
+            "datetime": "2022-10-20T00:55:38+00:00"
+        },
+        {
+            "timestamp": 1666230938,
+            "height": -0.0022536469,
+            "state": "RISING",
+            "datetime": "2022-10-20T01:55:38+00:00"
+        },
+        {
+            "timestamp": 1666234538,
+            "height": 0.1731803998,
+            "state": "RISING",
+            "datetime": "2022-10-20T02:55:38+00:00"
+        },
+        {
+            "timestamp": 1666238138,
+            "height": 0.3174931313,
+            "state": "RISING",
+            "datetime": "2022-10-20T03:55:38+00:00"
+        },
+        {
+            "timestamp": 1666241738,
+            "height": 0.3953570568,
+            "state": "RISING",
+            "datetime": "2022-10-20T04:55:38+00:00"
+        },
+        {
+            "timestamp": 1666245338,
+            "height": 0.4004260382,
+            "state": "FALLING",
+            "datetime": "2022-10-20T05:55:38+00:00"
+        },
+        {
+            "timestamp": 1666248938,
+            "height": 0.3224534376,
+            "state": "FALLING",
+            "datetime": "2022-10-20T06:55:38+00:00"
+        },
+        {
+            "timestamp": 1666252538,
+            "height": 0.1627249339,
+            "state": "FALLING",
+            "datetime": "2022-10-20T07:55:38+00:00"
+        },
+        {
+            "timestamp": 1666256138,
+            "height": -0.0389049581,
+            "state": "FALLING",
+            "datetime": "2022-10-20T08:55:38+00:00"
+        },
+        {
+            "timestamp": 1666259738,
+            "height": -0.2327729347,
+            "state": "FALLING",
+            "datetime": "2022-10-20T09:55:38+00:00"
+        },
+        {
+            "timestamp": 1666263338,
+            "height": -0.4034375189,
+            "state": "FALLING",
+            "datetime": "2022-10-20T10:55:38+00:00"
+        },
+        {
+            "timestamp": 1666266938,
+            "height": -0.5507143847,
+            "state": "FALLING",
+            "datetime": "2022-10-20T11:55:38+00:00"
+        },
+        {
+            "timestamp": 1666270538,
+            "height": -0.6422267329,
+            "state": "FALLING",
+            "datetime": "2022-10-20T12:55:38+00:00"
+        },
+        {
+            "timestamp": 1666274138,
+            "height": -0.6279157693,
+            "state": "RISING",
+            "datetime": "2022-10-20T13:55:38+00:00"
+        },
+        {
+            "timestamp": 1666277738,
+            "height": -0.4984705423,
+            "state": "RISING",
+            "datetime": "2022-10-20T14:55:38+00:00"
+        }
+    ],
+    "source": "STATION",
+    "copyright": "©2022 Marea | Generated using NOAA CO-OPS Tides & Currents Metadata, https://tidesandcurrents.noaa.gov"
 }

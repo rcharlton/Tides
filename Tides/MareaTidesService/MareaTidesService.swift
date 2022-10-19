@@ -13,13 +13,16 @@ class MareaTidesService: TidesService {
 
     private let mareaClient: EndpointInvoking
 
-    init(mareaClient: EndpointInvoking = Marea.makeClient()) {
+    private let shouldReturnBundledData: Bool
+
+    init(mareaClient: EndpointInvoking = Marea.makeClient(), shouldReturnBundledData: Bool = false) {
         self.mareaClient = mareaClient
+        self.shouldReturnBundledData = shouldReturnBundledData
     }
 
     func locateStations(from coordinate: Coordinate) async throws -> [StationSummary] {
         let stationsList: Marea.ListStations.Success
-        if let bundledStationsList = try Marea.bundledStationsList {
+        if shouldReturnBundledData, let bundledStationsList = try Marea.bundledStationsList {
             stationsList = bundledStationsList
         } else {
             stationsList = try await mareaClient.invoke(endpoint: Marea.ListStations())
@@ -32,7 +35,7 @@ class MareaTidesService: TidesService {
 
     func station(for id: String) async throws -> Station {
         let station: Marea.GetStation.Success
-        if let bundledStation = try Marea.bundledStation {
+        if shouldReturnBundledData, let bundledStation = try Marea.bundledStation {
             station = bundledStation
         } else {
             station = try await mareaClient.invoke(endpoint: Marea.GetStation(id: id))
@@ -43,7 +46,7 @@ class MareaTidesService: TidesService {
 
     func tidesPrediction(for stationId: String) async throws -> TidesPrediction {
         let tides: Marea.GetTides.Success
-        if let bundledTides = try Marea.bundledTidesForStation {
+        if shouldReturnBundledData, let bundledTides = try Marea.bundledTidesForStation {
             tides = bundledTides
         } else {
             tides = try await mareaClient.invoke(endpoint: Marea.GetTides(stationId: stationId))

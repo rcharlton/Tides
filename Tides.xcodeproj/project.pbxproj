@@ -26,6 +26,7 @@
 		006000A628DF69EF00B1CCD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006000A528DF69EF00B1CCD5 /* Preview Assets.xcassets */; };
 		006000B028DF69EF00B1CCD5 /* TidesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006000AF28DF69EF00B1CCD5 /* TidesTests.swift */; };
 		007192F529002B650069B665 /* TidesViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007192F429002B650069B665 /* TidesViewFactory.swift */; };
+		007192F72900570B0069B665 /* Datums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007192F62900570B0069B665 /* Datums.swift */; };
 		0077DBB228E05D2E00F9DB2C /* CoreLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077DBB128E05D2E00F9DB2C /* CoreLocationService.swift */; };
 		0077DBB828E319A800F9DB2C /* ListStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077DBB728E319A800F9DB2C /* ListStations.swift */; };
 		0077DBBB28E31F0B00F9DB2C /* Bricolage in Frameworks */ = {isa = PBXBuildFile; productRef = 0077DBBA28E31F0B00F9DB2C /* Bricolage */; };
@@ -85,6 +86,7 @@
 		00705E3028E389C800EFEDF7 /* Bricolage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Bricolage; path = ../../Bricolage; sourceTree = "<group>"; };
 		007192F0290016620069B665 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		007192F429002B650069B665 /* TidesViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesViewFactory.swift; sourceTree = "<group>"; };
+		007192F62900570B0069B665 /* Datums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datums.swift; sourceTree = "<group>"; };
 		0077DBB128E05D2E00F9DB2C /* CoreLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationService.swift; sourceTree = "<group>"; };
 		0077DBB728E319A800F9DB2C /* ListStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStations.swift; sourceTree = "<group>"; };
 		008E2CA128F6CC5800E8A879 /* TidesPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesPredictionView.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				00B992DD28E5EA2800D1D61C /* GetTides.swift */,
 				0077DBB728E319A800F9DB2C /* ListStations.swift */,
 				00F0544328E3218100BFB13A /* Marea.swift */,
+				007192F62900570B0069B665 /* Datums.swift */,
 			);
 			path = MareaAPI;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				00F70CB428FC338400B4BFF6 /* PresentableError+EndpointError.swift in Sources */,
 				0058196128FC73B40060597D /* TidesViewModel.swift in Sources */,
 				008E2CA228F6CC5800E8A879 /* TidesPredictionView.swift in Sources */,
+				007192F72900570B0069B665 /* Datums.swift in Sources */,
 				00F0544428E3218100BFB13A /* Marea.swift in Sources */,
 				007192F529002B650069B665 /* TidesViewFactory.swift in Sources */,
 				00E2D5BB28F9C92C00739737 /* StationListViewModel.swift in Sources */,

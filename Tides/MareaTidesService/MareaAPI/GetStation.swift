@@ -13,42 +13,7 @@ extension Marea {
                 case reference = "REFERENCE"
             }
 
-            struct Datums: Decodable {
-                let mhhw: Double
-                let mhw: Double
-                let mtl: Double
-                let dtl: Double
-                let mlw: Double
-                let mllw: Double
-                let stnd: Double
-                let gt: Double
-                let mn: Double
-                let dhq: Double
-                let dlq: Double
-                let hwi: Double
-                let lwi: Double
-                let lat: Double
-                let hat: Double
-
-                enum CodingKeys: String, CodingKey {
-                    case mhhw = "MHHW"
-                    case mhw = "MHW"
-                    case mtl = "MTL"
-                    case dtl = "DTL"
-                    case mlw = "MLW"
-                    case mllw = "MLLW"
-                    case stnd = "STND"
-                    case gt = "GT"
-                    case mn = "MN"
-                    case dhq = "DHQ"
-                    case dlq = "DLQ"
-                    case hwi = "HWI"
-                    case lwi = "LWI"
-                    case lat = "LAT"
-                    case hat = "HAT"
-                }
-            }
-
+            let status: UInt
             let id: String
             let name: String
             let latitude: Double
