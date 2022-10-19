@@ -9,16 +9,6 @@ class ViewFactory {
     let locationService: LocationService
     let tidesService: TidesService
 
-    func makeMainView() -> some View {
-        MainView(
-            viewFactory: self,
-            viewModel: MainViewModel(
-                stationProvider: tidesService,
-                tidesPredictionProvider: tidesService
-            )
-        )
-    }
-
     init(
         locationService: LocationService = CoreLocationService(),
         tidesService: TidesService = MareaTidesService()
