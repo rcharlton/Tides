@@ -6,7 +6,7 @@ import Combine
 import SwiftUI
 
 @MainActor
-class MainViewModel: ObservableObject {
+class TidesViewModel: ObservableObject {
     enum ViewState {
         case failed(PresentableError)
         case loading(StationSummary)

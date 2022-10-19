@@ -5,16 +5,16 @@
 import SwiftUI
 
 @MainActor
-protocol MainViewFactory {
-    func makeMainView() -> AnyView
+protocol TidesViewFactory {
+    func makeTidesView() -> AnyView
 }
 
-extension ViewFactory: MainViewFactory {
-    func makeMainView() -> AnyView {
+extension ViewFactory: TidesViewFactory {
+    func makeTidesView() -> AnyView {
         AnyView(
-            MainView(
+            TidesView(
                 viewFactory: self,
-                viewModel: MainViewModel(
+                viewModel: TidesViewModel(
                     stationProvider: tidesService,
                     tidesPredictionProvider: tidesService
                 )

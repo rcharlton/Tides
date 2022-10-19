@@ -8,7 +8,7 @@ import SwiftUI
 struct TidesApp: App {
     var body: some Scene {
         WindowGroup {
-            ViewFactory().makeMainView()
+            ViewFactory().makeTidesView()
         }
     }
 }

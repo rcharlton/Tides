@@ -4,10 +4,10 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct TidesView: View {
     let viewFactory: StationListViewFactory
 
-    @ObservedObject var viewModel: MainViewModel
+    @ObservedObject var viewModel: TidesViewModel
 
     @State private var isStationListPresented = false
 
@@ -57,6 +57,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        Preview.viewFactory.makeMainView()
+        Preview.viewFactory.makeTidesView()
     }
 }
