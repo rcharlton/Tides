@@ -41,12 +41,12 @@ class MareaTidesService: TidesService {
         return Station(from: station)
     }
 
-    func tidesPrediction() async throws -> TidesPrediction {
+    func tidesPrediction(for stationId: String) async throws -> TidesPrediction {
         let tides: Marea.GetTides.Success
         if let bundledTides = try Marea.bundledTidesForStation {
             tides = bundledTides
         } else {
-            tides = try await mareaClient.invoke(endpoint: Marea.GetTides())
+            tides = try await mareaClient.invoke(endpoint: Marea.GetTides(stationId: stationId))
         }
 
         return TidesPrediction(from: tides)

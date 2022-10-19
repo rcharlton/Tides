@@ -25,7 +25,7 @@ extension Preview {
             await Preview.stationSummaries
         }
 
-        func tidesPrediction() async throws -> TidesPrediction {
+        func tidesPrediction(for stationId: String) async throws -> TidesPrediction {
             await Preview.tidesPrediction
         }
     }

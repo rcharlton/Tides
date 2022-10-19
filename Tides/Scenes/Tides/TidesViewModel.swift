@@ -45,7 +45,7 @@ class TidesViewModel: ObservableObject {
                 do {
                     viewState = .loading(stationSummary)
                     async let station = stationProvider.station(for: stationSummary.id)
-                    async let tidesPrediction = tidesPredictionProvider.tidesPrediction()
+                    async let tidesPrediction = tidesPredictionProvider.tidesPrediction(for: stationSummary.id)
                     viewState = .ready(try await station, try await tidesPrediction)
                 } catch let error as MareaTidesService.LocateStationsError {
                     viewState = .failed(PresentableError(error, cancel: cancelAction))

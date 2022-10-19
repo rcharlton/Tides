@@ -22,39 +22,87 @@ extension Marea {
                 let station: Station?
             }
 
+            /// https://tidesandcurrents.noaa.gov/datum_options.html
             struct Datums: Decodable {
-                let mhhw: Double
-                let mhw: Double
-                let mtl: Double
-                let dtl: Double
-                let mlw: Double
-                let mllw: Double
-//                let stnd: Double
-                let gt: Double
-                let mn: Double
-                let dhq: Double
-                let dlq: Double
-//                let hwi: Double
-//                let lwi: Double
+                /// Lowest Astronomical Tide.
+                /// The elevation of the lowest astronomical predicted tide expected to occur at a
+                /// specific tide station over the National Tidal Datum Epoch.
                 let lat: Double
+
+                /// Highest Astronomical Tide.
+                /// The elevation of the highest predicted astronomical tide expected to occur at a
+                /// specific tide station over the National Tidal Datum Epoch.
                 let hat: Double
 
+                /// Mean Lower Low Water.
+                /// The average of the lower low water height of each tidal day observed over the
+                /// National Tidal Datum Epoch. For stations with shorter series, comparison of
+                /// simultaneous observations with a control tide station is made in order to derive
+                /// the equivalent datum of the National Tidal Datum Epoch.
+                let mllw: Double
+
+                /// Mean Higher High Water.
+                /// The average of the higher high water height of each tidal day observed over the
+                /// National Tidal Datum Epoch. For stations with shorter series, comparison of
+                /// simultaneous observations with a control tide station is made in order to derive
+                /// the equivalent datum of the National Tidal Datum Epoch.
+                let mhhw: Double
+
+                /// Mean High Water.
+                /// The average of all the high water heights observed over the National Tidal Datum
+                /// Epoch. For stations with shorter series, comparison of simultaneous observations
+                /// with a control tide station is made in order to derive the equivalent datum of
+                /// the National Tidal Datum Epoch.
+                let mhw: Double
+
+                /// Mean Low Water.
+                /// The average of all the low water heights observed over the National Tidal Datum
+                /// Epoch. For stations with shorter series, comparison of simultaneous observations
+                /// with a control tide station is made in order to derive the equivalent datum of
+                /// the National Tidal Datum Epoch.
+                let mlw: Double
+
+                /// Mean Tide Level.
+                /// The arithmetic mean of mean high water and mean low water.
+                let mtl: Double
+
+                /// Diurnal Tide Level.
+                /// The arithmetic mean of mean higher high water and mean lower low water.
+                let dtl: Double
+
+                /// Great Diurnal Range.
+                /// The difference in height between mean higher high water and mean lower low water.
+                let gt: Double
+
+                /// Mean Range of Tide.
+                /// The difference in height between mean high water and mean low water.
+                let mn: Double
+
+                /// Mean Diurnal Low Water Inequality.
+                /// One-half the average difference between the two low waters of each tidal day
+                /// observed over the National Tidal Datum Epoch. It is obtained by subtracting the
+                /// mean of the lower low waters from the mean of all the low waters.
+                let dlq: Double
+
+                /// Mean Diurnal High Water Inequality.
+                /// One-half the average difference between the two high waters of each tidal day
+                /// observed over the National Tidal Datum Epoch. It is obtained by subtracting the
+                /// mean of all the high waters from the mean of the higher high waters.
+                let dhq: Double
+
                 enum CodingKeys: String, CodingKey {
-                    case mhhw = "MHHW"
-                    case mhw = "MHW"
-                    case mtl = "MTL"
-                    case dtl = "DTL"
-                    case mlw = "MLW"
-                    case mllw = "MLLW"
-//                    case stnd = "STND"
-                    case gt = "GT"
-                    case mn = "MN"
-                    case dhq = "DHQ"
-                    case dlq = "DLQ"
-//                    case hwi = "HWI"
-//                    case lwi = "LWI"
                     case lat = "LAT"
                     case hat = "HAT"
+                    case mllw = "MLLW"
+                    case mhhw = "MHHW"
+                    case mhw = "MHW"
+                    case mlw = "MLW"
+                    case mtl = "MTL"
+                    case dtl = "DTL"
+                    case gt = "GT"
+                    case mn = "MN"
+                    case dlq = "DLQ"
+                    case dhq = "DHQ"
                 }
             }
 
@@ -88,18 +136,45 @@ extension Marea {
             }
 
             let disclaimer: String
+
+            /// Response status.
+            let status: UInt
+
+            /// Requested coordinate.
             let latitude: Double
             let longitude: Double
+
+            /// Nearest location for requested coordinates with tide predictions available.
             let origin: Origin
+
+            /// Tidal datums.
             let datums: Datums
+
+            /// Requested timestamp.
             let timestamp: UInt
+
+            /// Timestamp as datetime in timezone specified in timezone field.
             let datetime: String // "2021-10-05T16:26:50+00:00"
+
+            /// Unit for the prediction heights.
             let unit: String
+
+            /// Datetime timezone.
             let timezone: String
+
+            /// Reference Tidal datum.
             let datum: String
+
+            /// List of low and high tides.
             let extremes: [Extreme]
+
+            /// List of water levels with requested interval.
             let heights: [Height]
+
+            /// Prediction source: either model (FES2014, EOT20) OR "STATION".
             let source: Source
+
+            /// Prediction source copyright.
             let copyright: String
         }
 
@@ -123,6 +198,7 @@ extension Marea {
 
         let successStatusCodes = [200]
 
+        // Query parameters:
         let duration: UInt?
         let timestamp: UInt?
         let radius: UInt?
@@ -134,6 +210,27 @@ extension Marea {
         let stationId: String?
         let datum: Datum?
 
+        /// Initializer
+        /// - Parameters:
+        ///   - duration:  Duration is the number of minutes for which the forecast should be calculated.
+        ///                Default is 1440 (one day). Please note that one response can contain max
+        ///                10080 predicted heights, so duration can't be bigger than 10080.
+        ///   - timestamp: Timestamp (number of seconds since the unix epoch) of the prediction beginning.
+        //                 Defaults to current timestamp.
+        ///   - radius:    When no prediction is found in requested coordinates, API tries to return
+        ///                the nearest prediction. You can limit the radius by setting radius parameter
+        ///                to any positive integer.
+        ///   - interval:  Interval means number of minutes between the returned measurements.
+        ///                Please note that one response can contain max 10080 predicted heights,
+        ///                so interval can't be bigger than 10080.
+        ///   - latitude:  Latitude in range from -90 to 90.
+        ///   - longitude: Longitude in range from -180 to 180.
+        ///   - model:     Preferred model for Tide prediction: FES2014 (default) or EOT20
+        ///   - datum:     Reference vertical datum (https://en.wikipedia.org/wiki/Vertical_datum).
+        ///                When specified all returned heights will be referred to selected datum
+        ///                (list of low and high tides, list of water levels, list of datums).
+        ///                Allowed: LAT, HAT, MLLW, MHHW, MHW, MLW, MTL, DTL, GT, MN, DHQ, DLQ, MSL
+        ///                Default: MSL
         init(
             duration: UInt? = nil,
             timestamp: UInt? = nil,
@@ -142,8 +239,6 @@ extension Marea {
             latitude: Double? = nil,
             longitude: Double? = nil,
             model: String? = nil,
-            stationRadius: UInt? = nil,
-            stationId: String? = nil,
             datum: Datum? = nil
         ) {
             self.duration = duration
@@ -152,6 +247,47 @@ extension Marea {
             self.interval = interval
             self.latitude = latitude
             self.longitude = longitude
+            self.model = model
+            self.stationRadius = nil
+            self.stationId = nil
+            self.datum = datum
+        }
+
+        /// Initializer
+        /// - Parameters:
+        ///   - duration:  Duration is the number of minutes for which the forecast should be calculated.
+        ///                Default is 1440 (one day). Please note that one response can contain max
+        ///                10080 predicted heights, so duration can't be bigger than 10080.
+        ///   - timestamp: Timestamp (number of seconds since the unix epoch) of the prediction beginning.
+        //                 Defaults to current timestamp.
+        ///   - interval:  Interval means number of minutes between the returned measurements.
+        ///                Please note that one response can contain max 10080 predicted heights,
+        ///                so interval can't be bigger than 10080.
+        ///   - model:     Preferred model for Tide prediction: FES2014 (default) or EOT20
+        ///   - stationRadius: When station is found in specified station_radius, return the prediction
+        ///                    from the station (if not found, nearest model prediction is used).
+        ///   - stationId: Prediction for particular Station by ID (can't be used together with
+        ///                latitude and longitude parameters)
+        ///   - datum:     Reference vertical datum (https://en.wikipedia.org/wiki/Vertical_datum).
+        ///                When specified all returned heights will be referred to selected datum
+        ///                (list of low and high tides, list of water levels, list of datums).
+        ///                Allowed: LAT, HAT, MLLW, MHHW, MHW, MLW, MTL, DTL, GT, MN, DHQ, DLQ, MSL
+        ///                Default: MSL
+        init(
+            duration: UInt? = nil,
+            timestamp: UInt? = nil,
+            interval: UInt? = nil,
+            model: String? = nil,
+            stationRadius: UInt? = nil,
+            stationId: String? = nil,
+            datum: Datum? = nil
+        ) {
+            self.duration = duration
+            self.timestamp = timestamp
+            self.radius = nil
+            self.interval = interval
+            self.latitude = nil
+            self.longitude = nil
             self.model = model
             self.stationRadius = stationRadius
             self.stationId = stationId

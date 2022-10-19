@@ -13,5 +13,5 @@ protocol StationProviding {
 }
 
 protocol TidesPredictionProviding {
-    func tidesPrediction() async throws -> TidesPrediction
+    func tidesPrediction(for stationId: String) async throws -> TidesPrediction
 }
