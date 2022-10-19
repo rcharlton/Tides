@@ -19,7 +19,7 @@
 		0058196728FEF5920060597D /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058196628FEF5920060597D /* EnvironmentValues.swift */; };
 		0058196928FEFB170060597D /* ViewFactory+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058196828FEFB170060597D /* ViewFactory+Preview.swift */; };
 		0058196B28FEFC8F0060597D /* Binding+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058196A28FEFC8F0060597D /* Binding+Stub.swift */; };
-		0058196D28FF0A7F0060597D /* TidesPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058196C28FF0A7F0060597D /* TidesPrediction.swift */; };
+		0058196D28FF0A7F0060597D /* Tides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058196C28FF0A7F0060597D /* Tides.swift */; };
 		005891BA28DF75AA004E5346 /* CLAuthorizationStatus+CustomDebugStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005891B928DF75AA004E5346 /* CLAuthorizationStatus+CustomDebugStringConvertible.swift */; };
 		0060009F28DF69EC00B1CCD5 /* TidesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060009E28DF69EC00B1CCD5 /* TidesApp.swift */; };
 		006000A328DF69EF00B1CCD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006000A228DF69EF00B1CCD5 /* Assets.xcassets */; };
@@ -73,7 +73,7 @@
 		0058196628FEF5920060597D /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		0058196828FEFB170060597D /* ViewFactory+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewFactory+Preview.swift"; sourceTree = "<group>"; };
 		0058196A28FEFC8F0060597D /* Binding+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Stub.swift"; sourceTree = "<group>"; };
-		0058196C28FF0A7F0060597D /* TidesPrediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesPrediction.swift; sourceTree = "<group>"; };
+		0058196C28FF0A7F0060597D /* Tides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tides.swift; sourceTree = "<group>"; };
 		005891B928DF75AA004E5346 /* CLAuthorizationStatus+CustomDebugStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAuthorizationStatus+CustomDebugStringConvertible.swift"; sourceTree = "<group>"; };
 		0060009B28DF69EC00B1CCD5 /* Tides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0060009E28DF69EC00B1CCD5 /* TidesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesApp.swift; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 				00274BAA28F7151300EC2D91 /* Coordinate.swift */,
 				00E2D5B328F85B6E00739737 /* Station.swift */,
 				00274BA528F7142B00EC2D91 /* StationSummary.swift */,
-				0058196C28FF0A7F0060597D /* TidesPrediction.swift */,
+				0058196C28FF0A7F0060597D /* Tides.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -431,7 +431,7 @@
 				00E2D5BB28F9C92C00739737 /* StationListViewModel.swift in Sources */,
 				00274BA928F714A900EC2D91 /* TidesService.swift in Sources */,
 				00274BA628F7142B00EC2D91 /* StationSummary.swift in Sources */,
-				0058196D28FF0A7F0060597D /* TidesPrediction.swift in Sources */,
+				0058196D28FF0A7F0060597D /* Tides.swift in Sources */,
 				00B992DE28E5EA2800D1D61C /* GetTides.swift in Sources */,
 				0060009F28DF69EC00B1CCD5 /* TidesApp.swift in Sources */,
 				00274BA228F6D38400EC2D91 /* TidesView.swift in Sources */,

@@ -8,15 +8,15 @@ enum Preview {
 
 extension Preview {
     static let viewFactory = ViewFactory(
-        locationService: LocationService(),
-        tidesService: TidesService()
+        locationService: PreviewLocationService(),
+        tidesService: PreviewTidesService()
     )
 
-    class LocationService: Tides.LocationService {
+    class PreviewLocationService: LocationService {
         let currentLocation = Coordinate(latitude: 51.4, longitude: 0)
     }
 
-    class TidesService: Tides.TidesService {
+    class PreviewTidesService: TidesService {
         func station(for id: String) async throws -> Station {
             await Preview.stations[0]
         }
@@ -25,8 +25,8 @@ extension Preview {
             await Preview.stationSummaries
         }
 
-        func tidesPrediction(for stationId: String) async throws -> TidesPrediction {
-            await Preview.tidesPrediction
+        func tides(for stationId: String) async throws -> Tides {
+            await Preview.tides
         }
     }
 
@@ -44,8 +44,8 @@ extension Preview {
         }
     }
 
-    static var tidesPrediction: TidesPrediction {
-        TidesPrediction()
+    static var tides: Tides {
+        Tides()
     }
 
     static let presentableError = PresentableError(endpointError)

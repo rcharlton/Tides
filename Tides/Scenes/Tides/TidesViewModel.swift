@@ -10,7 +10,7 @@ class TidesViewModel: ObservableObject {
     enum ViewState {
         case failed(PresentableError)
         case loading(StationSummary)
-        case ready(Station, TidesPrediction)
+        case ready(Station, Tides)
         case welcome
     }
 
@@ -45,8 +45,8 @@ class TidesViewModel: ObservableObject {
                 do {
                     viewState = .loading(stationSummary)
                     async let station = stationProvider.station(for: stationSummary.id)
-                    async let tidesPrediction = tidesPredictionProvider.tidesPrediction(for: stationSummary.id)
-                    viewState = .ready(try await station, try await tidesPrediction)
+                    async let tides = tidesPredictionProvider.tides(for: stationSummary.id)
+                    viewState = .ready(try await station, try await tides)
                 } catch let error as MareaTidesService.LocateStationsError {
                     viewState = .failed(PresentableError(error, cancel: cancelAction))
                 } catch let error as MareaTidesService.TidesPredictionError {

@@ -44,7 +44,7 @@ class MareaTidesService: TidesService {
         return Station(from: station)
     }
 
-    func tidesPrediction(for stationId: String) async throws -> TidesPrediction {
+    func tides(for stationId: String) async throws -> Tides {
         let tides: Marea.GetTides.Success
         if shouldReturnBundledData, let bundledTides = try Marea.bundledTidesForStation {
             tides = bundledTides
@@ -52,7 +52,7 @@ class MareaTidesService: TidesService {
             tides = try await mareaClient.invoke(endpoint: Marea.GetTides(stationId: stationId))
         }
 
-        return TidesPrediction(from: tides)
+        return Tides(from: tides)
     }
 }
 
@@ -71,7 +71,7 @@ private extension Station {
     }
 }
 
-private extension TidesPrediction {
+private extension Tides {
     init(from success: Marea.GetTides.Success) {
         self.init()
     }
