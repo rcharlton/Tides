@@ -290,11 +290,11 @@
 				00B992D928E5DDD300D1D61C /* v2-stations.json */,
 				00E2D5B528F85DDA00739737 /* v2-tides-model.json */,
 				00E2D5B728F85FAC00739737 /* v2-tides-station.json */,
+				007192F62900570B0069B665 /* Datums.swift */,
 				00B992DB28E5E37600D1D61C /* GetStation.swift */,
 				00B992DD28E5EA2800D1D61C /* GetTides.swift */,
 				0077DBB728E319A800F9DB2C /* ListStations.swift */,
 				00F0544328E3218100BFB13A /* Marea.swift */,
-				007192F62900570B0069B665 /* Datums.swift */,
 			);
 			path = MareaAPI;
 			sourceTree = "<group>";

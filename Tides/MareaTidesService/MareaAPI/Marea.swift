@@ -8,7 +8,14 @@ import Foundation
 /// https://api.marea.ooo/doc/
 enum Marea {
     private static let serviceURL = URL(string: "https://api.marea.ooo")!
+
     private static let apiTokenHeader = ["x-marea-api-token": "a29026b6-f2ce-4143-b2de-ee566fbfd3cb"]
+
+    static func makeJSONDecoder() -> JSONDecoder {
+        configure(JSONDecoder()) {
+            $0.dateDecodingStrategy = .iso8601
+        }
+    }
 
     static func makeClient() -> EndpointInvoking {
         configure(WebClient(serviceURL: Marea.serviceURL)) {

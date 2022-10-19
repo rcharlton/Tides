@@ -19,6 +19,8 @@ extension Marea {
 
         let successStatusCodes = [200]
 
+        var decoder: Decoding { makeJSONDecoder() }
+
         func urlRequest(relativeTo url: URL) -> URLRequest? {
             URL(string: "/v2/stations", relativeTo: url)
                 .map { URLRequest(url: $0) }

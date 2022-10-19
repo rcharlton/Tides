@@ -29,7 +29,7 @@ extension Marea {
                     case highTide = "HIGH TIDE"
                 }
                 let timestamp: UInt
-                let datetime: String
+                let datetime: Date
                 let height: Double
                 let state: State
             }
@@ -40,7 +40,7 @@ extension Marea {
                     case rising = "RISING"
                 }
                 let timestamp: UInt
-                let datetime: String
+                let datetime: Date
                 let height: Double
                 let state: State
             }
@@ -69,8 +69,8 @@ extension Marea {
             /// Requested timestamp.
             let timestamp: UInt
 
-            /// Timestamp as datetime in timezone specified in timezone field.
-            let datetime: String // "2021-10-05T16:26:50+00:00"
+            /// Timestamp as in timezone specified in timezone field.
+            let datetime: Date
 
             /// Unit for the prediction heights.
             let unit: String
@@ -113,6 +113,8 @@ extension Marea {
         }
 
         let successStatusCodes = [200]
+
+        var decoder: Decoding { makeJSONDecoder() }
 
         // Query parameters:
         let duration: UInt?
@@ -242,7 +244,7 @@ extension Marea {
             try Bundle.main
                 .url(forResource: "v2-tides-model", withExtension: "json")
                 .flatMap { try Data(contentsOf: $0) }
-                .flatMap { try JSONDecoder().decode(GetTides.Success.self, from: $0) }
+                .flatMap { try makeJSONDecoder().decode(GetTides.Success.self, from: $0) }
         }
     }
 
@@ -251,7 +253,7 @@ extension Marea {
             try Bundle.main
                 .url(forResource: "v2-tides-station", withExtension: "json")
                 .flatMap { try Data(contentsOf: $0) }
-                .flatMap { try JSONDecoder().decode(GetTides.Success.self, from: $0) }
+                .flatMap { try makeJSONDecoder().decode(GetTides.Success.self, from: $0) }
         }
     }
 }

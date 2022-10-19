@@ -9,7 +9,7 @@ class MareaTidesService: TidesService {
 
     typealias LocateStationsError = EndpointError<Marea.ListStations>
     typealias StationError = EndpointError<Marea.GetStation>
-    typealias TidesPredictionError = EndpointError<Marea.GetTides>
+    typealias TidesError = EndpointError<Marea.GetTides>
 
     private let mareaClient: EndpointInvoking
 

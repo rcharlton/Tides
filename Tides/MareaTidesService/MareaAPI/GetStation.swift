@@ -27,6 +27,9 @@ extension Marea {
         typealias Failure = Error
 
         let successStatusCodes = [200]
+        
+        var decoder: Decoding { makeJSONDecoder() }
+
         let id: String
 
         func urlRequest(relativeTo url: URL) -> URLRequest? {

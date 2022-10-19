@@ -48,12 +48,15 @@ class TidesViewModel: ObservableObject {
                     async let tides = tidesPredictionProvider.tides(for: stationSummary.id)
                     viewState = .ready(try await station, try await tides)
                 } catch let error as MareaTidesService.LocateStationsError {
+                    print(error)
                     viewState = .failed(PresentableError(error, cancel: cancelAction))
-                } catch let error as MareaTidesService.TidesPredictionError {
+                } catch let error as MareaTidesService.TidesError {
+                    print(error)
                     viewState = .failed(
                         PresentableError(error, cancel: cancelAction, retry: retryAction)
                     )
                 } catch {
+                    print(error)
                     viewState = .failed(
                         PresentableError(
                             title: "Unknown Failure",
