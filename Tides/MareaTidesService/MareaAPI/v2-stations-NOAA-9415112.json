@@ -1,0 +1,28 @@
+{
+    "status": 200,
+    "id": "NOAA:9415112",
+    "name": "Mallard Island, Suisun Bay",
+    "country": "United States",
+    "latitude": 38.0433,
+    "longitude": -121.918,
+    "provider": "National Oceanic and Atmospheric Administration (NOAA)",
+    "type": "HARMONIC",
+    "datums": {
+        "MHHW": 0.636,
+        "MHW": 0.485,
+        "MTL": -0.007,
+        "DTL": -0.035,
+        "MLW": -0.5,
+        "MLLW": -0.707,
+        "STND": -1.687,
+        "GT": 1.343,
+        "MN": 0.986,
+        "DHQ": 0.151,
+        "DLQ": 0.206,
+        "HWI": 10.73,
+        "LWI": 4.63,
+        "LAT": -1.007,
+        "HAT": 0.907
+    },
+    "timezone": "America/Los_Angeles"
+}
