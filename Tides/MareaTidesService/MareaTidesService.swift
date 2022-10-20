@@ -73,7 +73,32 @@ private extension Station {
 
 private extension Tides {
     init(from success: Marea.GetTides.Success) {
-        self.init()
+        self.init(
+            tides: success.extremes.map { Tide(from: $0) },
+            disclaimer: success.disclaimer,
+            copyright: success.copyright
+        )
+    }
+}
+
+private extension Tides.Tide {
+    init(from extreme: Marea.GetTides.Success.Extreme) {
+        self.init(
+            position: Position(from: extreme.state),
+            date: Date(timeIntervalSince1970: TimeInterval(extreme.timestamp)),
+            height: extreme.height
+        )
+    }
+}
+
+private extension Tides.Tide.Position {
+    init(from state: Marea.GetTides.Success.Extreme.State) {
+        switch state {
+        case .lowTide:
+            self = .low
+        case .highTide:
+            self = .high
+        }
     }
 }
 

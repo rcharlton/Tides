@@ -2,6 +2,8 @@
 // Copyright © 2022 Robin Charlton. All rights reserved.
 //
 
+import Foundation
+
 @MainActor
 enum Preview {
 }
@@ -32,10 +34,14 @@ extension Preview {
 
     static var stations: [Station] {
         [
-            Station(id: "1", name: "Sheerness", provider: "Provided by Preview"),
-            Station(id: "2", name: "Newhaven", provider: "Provided by Preview"),
-            Station(id: "3", name: "Portsmouth", provider: "Provided by Preview")
+            Station(id: "1", name: "Sheerness", provider: provider),
+            Station(id: "2", name: "Newhaven", provider: provider),
+            Station(id: "3", name: "Portsmouth", provider: provider)
         ]
+    }
+
+    static var provider: String {
+        "National Oceanic and Atmospheric Administration (NOAA)"
     }
 
     static var stationSummaries: [StationSummary] {
@@ -45,7 +51,14 @@ extension Preview {
     }
 
     static var tides: Tides {
-        Tides()
+        Tides(
+            tides: [
+                .init(position: .high, date: Date(), height: -1.2345),
+                .init(position: .low, date: Date(timeIntervalSinceNow: 8 * 60 * 60), height: 1.2345)
+            ],
+            disclaimer: "NOT SUITABLE FOR NAVIGATIONAL PURPOSES. Marea API does not warrant that the provided data will be free from errors or omissions. Provided data are NOT suitable for usage where someone could be harmed or suffer any damage.",
+            copyright: "©2021 Marea | Generated using AVISO+ Products. FES2014 was produced by Noveltis, Legos and CLS and distributed by Aviso+, with support from Cnes (https://www.aviso.altimetry.fr/)"
+        )
     }
 
     static let presentableError = PresentableError(endpointError)
