@@ -49,7 +49,21 @@ class MareaTidesService: TidesService {
         if shouldReturnBundledData, let bundledTides = try Marea.bundledTidesForStation {
             tides = bundledTides
         } else {
-            tides = try await mareaClient.invoke(endpoint: Marea.GetTides(stationId: stationId))
+            let startOfTodayDate = Calendar.current.startOfDay(for: Date())
+            let startOfDate = Calendar.current.date(
+                byAdding: .day,
+                value: -2,
+                to: startOfTodayDate
+            ) ?? startOfTodayDate
+            let startTime = UInt(startOfDate.timeIntervalSince1970)
+            let sevenDays: UInt = 10080
+
+            let getTidesEndpoint = Marea.GetTides(
+                duration: sevenDays,
+                timestamp: startTime,
+                stationId: stationId
+            )
+            tides = try await mareaClient.invoke(endpoint: getTidesEndpoint)
         }
 
         return Tides(from: tides)
@@ -73,8 +87,25 @@ private extension Station {
 
 private extension Tides {
     init(from success: Marea.GetTides.Success) {
+        let currentDate = Date()
+        let timestamp = UInt(currentDate.timeIntervalSince1970)
+
+        let height = zip(success.heights, success.heights[1...])
+            .first(where: { $0.timestamp <= timestamp && timestamp <= $1.timestamp })
+            .map { heights in
+                let m = (heights.1.height - heights.0.height) / Double(heights.1.timestamp - heights.0.timestamp)
+                let x = Double(timestamp - heights.0.timestamp)
+                let b = heights.0.height
+                return (m * x) + b
+            }
+
         self.init(
+            date: currentDate,
+            currentHeight: height ?? 0,
             tides: success.extremes.map { Tide(from: $0) },
+            lat: success.datums.lat,
+            hat: success.datums.hat,
+            unit: success.unit,
             disclaimer: success.disclaimer,
             copyright: success.copyright
         )

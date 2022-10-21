@@ -52,10 +52,15 @@ extension Preview {
 
     static var tides: Tides {
         Tides(
+            date: Date(),
+            height: 1,
             tides: [
                 .init(position: .high, date: Date(), height: -1.2345),
                 .init(position: .low, date: Date(timeIntervalSinceNow: 8 * 60 * 60), height: 1.2345)
             ],
+            lat: -2,
+            hat: 2,
+            unit: "m",
             disclaimer: "NOT SUITABLE FOR NAVIGATIONAL PURPOSES. Marea API does not warrant that the provided data will be free from errors or omissions. Provided data are NOT suitable for usage where someone could be harmed or suffer any damage.",
             copyright: "©2021 Marea | Generated using AVISO+ Products. FES2014 was produced by Noveltis, Legos and CLS and distributed by Aviso+, with support from Cnes (https://www.aviso.altimetry.fr/)"
         )

@@ -17,15 +17,21 @@ struct TidesPredictionView: View {
     private let numberFormatter = configure(NumberFormatter()) {
         $0.numberStyle = .decimal
         $0.maximumFractionDigits = 2
+        $0.minimumFractionDigits = 1
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Label(station.name, systemImage: "mappin.and.ellipse")
+            Text(station.name)
                 .font(.largeTitle)
 
             Text(station.provider)
                 .font(.subheadline)
+
+
+            let date = dateFormatter.string(from: tides.date)
+            let height = numberFormatter.string(from: NSNumber(value: tides.height)) ?? "n/a"
+            Text("\(date) : \(height)\(tides.unit)")
 
 
             ForEach(tides.tides, id: \.date) { tide in
@@ -34,7 +40,7 @@ struct TidesPredictionView: View {
                     Text(tide.position.description)
 
                     let height = numberFormatter.string(from: NSNumber(value: tide.height)) ?? "unknown"
-                    Text("\(height) units?")
+                    Text("\(height)\(tides.unit)")
                 }
                 .font(.body)
             }

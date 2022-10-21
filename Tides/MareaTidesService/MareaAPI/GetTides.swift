@@ -18,6 +18,8 @@ extension Marea {
 
                 let latitude: Double
                 let longitude: Double
+
+                /// Origin distance from requested coordinates.
                 let distance: Double
                 let unit: String
                 let station: Station?
