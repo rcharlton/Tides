@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0011AAA629044DED00A34D50 /* Bundle+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0011AAA529044DED00A34D50 /* Bundle+Data.swift */; };
+		0011AAAA290452D300A34D50 /* Marea in Frameworks */ = {isa = PBXBuildFile; productRef = 0011AAA9290452D300A34D50 /* Marea */; };
 		00274BA228F6D38400EC2D91 /* TidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA128F6D38400EC2D91 /* TidesView.swift */; };
 		00274BA428F6D7A500EC2D91 /* StationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA328F6D7A500EC2D91 /* StationListView.swift */; };
 		00274BA628F7142B00EC2D91 /* StationSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA528F7142B00EC2D91 /* StationSummary.swift */; };
@@ -26,24 +28,19 @@
 		006000A628DF69EF00B1CCD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006000A528DF69EF00B1CCD5 /* Preview Assets.xcassets */; };
 		006000B028DF69EF00B1CCD5 /* TidesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006000AF28DF69EF00B1CCD5 /* TidesTests.swift */; };
 		007192F529002B650069B665 /* TidesViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007192F429002B650069B665 /* TidesViewFactory.swift */; };
-		007192F72900570B0069B665 /* Datums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007192F62900570B0069B665 /* Datums.swift */; };
 		0077DBB228E05D2E00F9DB2C /* CoreLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077DBB128E05D2E00F9DB2C /* CoreLocationService.swift */; };
-		0077DBB828E319A800F9DB2C /* ListStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077DBB728E319A800F9DB2C /* ListStations.swift */; };
 		0077DBBB28E31F0B00F9DB2C /* Bricolage in Frameworks */ = {isa = PBXBuildFile; productRef = 0077DBBA28E31F0B00F9DB2C /* Bricolage */; };
 		008E2CA228F6CC5800E8A879 /* TidesPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E2CA128F6CC5800E8A879 /* TidesPredictionView.swift */; };
 		008E836428F7559E00F0271C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E836328F7559E00F0271C /* Preview.swift */; };
 		008E836628F755BB00F0271C /* TouchGestureModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E836528F755BB00F0271C /* TouchGestureModifier.swift */; };
 		00B992D828E4A8CF00D1D61C /* StationListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B992D728E4A8CF00D1D61C /* StationListItemView.swift */; };
 		00B992DA28E5DDD300D1D61C /* v2-stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 00B992D928E5DDD300D1D61C /* v2-stations.json */; };
-		00B992DC28E5E37600D1D61C /* GetStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B992DB28E5E37600D1D61C /* GetStation.swift */; };
-		00B992DE28E5EA2800D1D61C /* GetTides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B992DD28E5EA2800D1D61C /* GetTides.swift */; };
 		00E2D5AE28F847F800739737 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2D5AD28F847F800739737 /* LocationService.swift */; };
 		00E2D5B228F85A8C00739737 /* v2-stations-NOAA-9415112.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E2D5B128F85A8C00739737 /* v2-stations-NOAA-9415112.json */; };
 		00E2D5B428F85B6E00739737 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2D5B328F85B6E00739737 /* Station.swift */; };
 		00E2D5B628F85DDA00739737 /* v2-tides-model.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E2D5B528F85DDA00739737 /* v2-tides-model.json */; };
 		00E2D5B828F85FAC00739737 /* v2-tides-station.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E2D5B728F85FAC00739737 /* v2-tides-station.json */; };
 		00E2D5BB28F9C92C00739737 /* StationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2D5BA28F9C92B00739737 /* StationListViewModel.swift */; };
-		00F0544428E3218100BFB13A /* Marea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F0544328E3218100BFB13A /* Marea.swift */; };
 		00F70CA728FAE4D700B4BFF6 /* View+When.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F70CA628FAE4D700B4BFF6 /* View+When.swift */; };
 		00F70CB228FC32FF00B4BFF6 /* PresentableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F70CB128FC32FF00B4BFF6 /* PresentableError.swift */; };
 		00F70CB428FC338400B4BFF6 /* PresentableError+EndpointError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F70CB328FC338400B4BFF6 /* PresentableError+EndpointError.swift */; };
@@ -61,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0011AAA529044DED00A34D50 /* Bundle+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Data.swift"; sourceTree = "<group>"; };
+		0011AAAB2904548F00A34D50 /* Marea */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Marea; path = ../../Marea; sourceTree = "<group>"; };
 		00274BA128F6D38400EC2D91 /* TidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesView.swift; sourceTree = "<group>"; };
 		00274BA328F6D7A500EC2D91 /* StationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListView.swift; sourceTree = "<group>"; };
 		00274BA528F7142B00EC2D91 /* StationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSummary.swift; sourceTree = "<group>"; };
@@ -83,26 +82,21 @@
 		006000AF28DF69EF00B1CCD5 /* TidesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesTests.swift; sourceTree = "<group>"; };
 		006000B928DF69EF00B1CCD5 /* TidesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesUITests.swift; sourceTree = "<group>"; };
 		006000BB28DF69EF00B1CCD5 /* TidesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		00705E3028E389C800EFEDF7 /* Bricolage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Bricolage; path = ../../Bricolage; sourceTree = "<group>"; };
+		006989D729045E2100C84863 /* Bricolage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Bricolage; path = ../../Bricolage; sourceTree = "<group>"; };
 		007192F0290016620069B665 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		007192F429002B650069B665 /* TidesViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesViewFactory.swift; sourceTree = "<group>"; };
-		007192F62900570B0069B665 /* Datums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datums.swift; sourceTree = "<group>"; };
 		0077DBB128E05D2E00F9DB2C /* CoreLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationService.swift; sourceTree = "<group>"; };
-		0077DBB728E319A800F9DB2C /* ListStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStations.swift; sourceTree = "<group>"; };
 		008E2CA128F6CC5800E8A879 /* TidesPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesPredictionView.swift; sourceTree = "<group>"; };
 		008E836328F7559E00F0271C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		008E836528F755BB00F0271C /* TouchGestureModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchGestureModifier.swift; sourceTree = "<group>"; };
 		00B992D728E4A8CF00D1D61C /* StationListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListItemView.swift; sourceTree = "<group>"; };
 		00B992D928E5DDD300D1D61C /* v2-stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "v2-stations.json"; sourceTree = "<group>"; };
-		00B992DB28E5E37600D1D61C /* GetStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStation.swift; sourceTree = "<group>"; };
-		00B992DD28E5EA2800D1D61C /* GetTides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTides.swift; sourceTree = "<group>"; };
 		00E2D5AD28F847F800739737 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		00E2D5B128F85A8C00739737 /* v2-stations-NOAA-9415112.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "v2-stations-NOAA-9415112.json"; sourceTree = "<group>"; };
 		00E2D5B328F85B6E00739737 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		00E2D5B528F85DDA00739737 /* v2-tides-model.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "v2-tides-model.json"; sourceTree = "<group>"; };
 		00E2D5B728F85FAC00739737 /* v2-tides-station.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "v2-tides-station.json"; sourceTree = "<group>"; };
 		00E2D5BA28F9C92B00739737 /* StationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListViewModel.swift; sourceTree = "<group>"; };
-		00F0544328E3218100BFB13A /* Marea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marea.swift; sourceTree = "<group>"; };
 		00F70CA628FAE4D700B4BFF6 /* View+When.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+When.swift"; sourceTree = "<group>"; };
 		00F70CB128FC32FF00B4BFF6 /* PresentableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableError.swift; sourceTree = "<group>"; };
 		00F70CB328FC338400B4BFF6 /* PresentableError+EndpointError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresentableError+EndpointError.swift"; sourceTree = "<group>"; };
@@ -115,6 +109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0077DBBB28E31F0B00F9DB2C /* Bricolage in Frameworks */,
+				0011AAAA290452D300A34D50 /* Marea in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +148,8 @@
 		0060009228DF69EC00B1CCD5 = {
 			isa = PBXGroup;
 			children = (
+				006989D729045E2100C84863 /* Bricolage */,
+				0011AAAB2904548F00A34D50 /* Marea */,
 				007192F0290016620069B665 /* README.md */,
 				00705E2F28E389C800EFEDF7 /* Packages */,
 				0060009D28DF69EC00B1CCD5 /* Tides */,
@@ -218,7 +215,6 @@
 		00705E2F28E389C800EFEDF7 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				00705E3028E389C800EFEDF7 /* Bricolage */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -286,15 +282,11 @@
 		00E2D5B928F878EF00739737 /* MareaAPI */ = {
 			isa = PBXGroup;
 			children = (
+				0011AAA529044DED00A34D50 /* Bundle+Data.swift */,
 				00E2D5B128F85A8C00739737 /* v2-stations-NOAA-9415112.json */,
 				00B992D928E5DDD300D1D61C /* v2-stations.json */,
 				00E2D5B528F85DDA00739737 /* v2-tides-model.json */,
 				00E2D5B728F85FAC00739737 /* v2-tides-station.json */,
-				007192F62900570B0069B665 /* Datums.swift */,
-				00B992DB28E5E37600D1D61C /* GetStation.swift */,
-				00B992DD28E5EA2800D1D61C /* GetTides.swift */,
-				0077DBB728E319A800F9DB2C /* ListStations.swift */,
-				00F0544328E3218100BFB13A /* Marea.swift */,
 			);
 			path = MareaAPI;
 			sourceTree = "<group>";
@@ -326,6 +318,7 @@
 			name = Tides;
 			packageProductDependencies = (
 				0077DBBA28E31F0B00F9DB2C /* Bricolage */,
+				0011AAA9290452D300A34D50 /* Marea */,
 			);
 			productName = Tides;
 			productReference = 0060009B28DF69EC00B1CCD5 /* Tides.app */;
@@ -379,6 +372,7 @@
 			mainGroup = 0060009228DF69EC00B1CCD5;
 			packageReferences = (
 				0077DBB928E31F0B00F9DB2C /* XCRemoteSwiftPackageReference "Bricolage" */,
+				0011AAA8290452D300A34D50 /* XCRemoteSwiftPackageReference "Marea" */,
 			);
 			productRefGroup = 0060009C28DF69EC00B1CCD5 /* Products */;
 			projectDirPath = "";
@@ -420,28 +414,24 @@
 			files = (
 				005891BA28DF75AA004E5346 /* CLAuthorizationStatus+CustomDebugStringConvertible.swift in Sources */,
 				00B992D828E4A8CF00D1D61C /* StationListItemView.swift in Sources */,
+				0011AAA629044DED00A34D50 /* Bundle+Data.swift in Sources */,
 				00E2D5AE28F847F800739737 /* LocationService.swift in Sources */,
 				00274BAD28F7160600EC2D91 /* MareaTidesService.swift in Sources */,
 				00F70CB428FC338400B4BFF6 /* PresentableError+EndpointError.swift in Sources */,
 				0058196128FC73B40060597D /* TidesViewModel.swift in Sources */,
 				008E2CA228F6CC5800E8A879 /* TidesPredictionView.swift in Sources */,
-				007192F72900570B0069B665 /* Datums.swift in Sources */,
-				00F0544428E3218100BFB13A /* Marea.swift in Sources */,
 				007192F529002B650069B665 /* TidesViewFactory.swift in Sources */,
 				00E2D5BB28F9C92C00739737 /* StationListViewModel.swift in Sources */,
 				00274BA928F714A900EC2D91 /* TidesService.swift in Sources */,
 				00274BA628F7142B00EC2D91 /* StationSummary.swift in Sources */,
 				0058196D28FF0A7F0060597D /* Tides.swift in Sources */,
-				00B992DE28E5EA2800D1D61C /* GetTides.swift in Sources */,
 				0060009F28DF69EC00B1CCD5 /* TidesApp.swift in Sources */,
 				00274BA228F6D38400EC2D91 /* TidesView.swift in Sources */,
 				00F70CB228FC32FF00B4BFF6 /* PresentableError.swift in Sources */,
 				0058196728FEF5920060597D /* EnvironmentValues.swift in Sources */,
 				00274BA428F6D7A500EC2D91 /* StationListView.swift in Sources */,
-				00B992DC28E5E37600D1D61C /* GetStation.swift in Sources */,
 				008E836628F755BB00F0271C /* TouchGestureModifier.swift in Sources */,
 				0058196928FEFB170060597D /* ViewFactory+Preview.swift in Sources */,
-				0077DBB828E319A800F9DB2C /* ListStations.swift in Sources */,
 				00E2D5B428F85B6E00739737 /* Station.swift in Sources */,
 				00274BAB28F7151300EC2D91 /* Coordinate.swift in Sources */,
 				008E836428F7559E00F0271C /* Preview.swift in Sources */,
@@ -720,6 +710,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0011AAA8290452D300A34D50 /* XCRemoteSwiftPackageReference "Marea" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:rcharlton/Marea.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		0077DBB928E31F0B00F9DB2C /* XCRemoteSwiftPackageReference "Bricolage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:rcharlton/Bricolage.git";
@@ -731,6 +729,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0011AAA9290452D300A34D50 /* Marea */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0011AAA8290452D300A34D50 /* XCRemoteSwiftPackageReference "Marea" */;
+			productName = Marea;
+		};
 		0077DBBA28E31F0B00F9DB2C /* Bricolage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0077DBB928E31F0B00F9DB2C /* XCRemoteSwiftPackageReference "Bricolage" */;

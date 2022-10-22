@@ -3,6 +3,7 @@
 //
 
 import Bricolage
+import Marea
 
 extension PresentableError {
     private static var retryableStatusCodes = [500, 503]
@@ -51,5 +52,5 @@ extension PresentableError {
 }
 
 extension Marea.Error: CustomStringConvertible {
-    public var description: String { error }
+    public var description: String { message }
 }

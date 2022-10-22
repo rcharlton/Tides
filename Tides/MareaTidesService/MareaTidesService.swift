@@ -4,28 +4,36 @@
 
 import Bricolage
 import Foundation
+import Marea
 
 class MareaTidesService: TidesService {
 
-    typealias LocateStationsError = EndpointError<Marea.ListStations>
-    typealias StationError = EndpointError<Marea.GetStation>
-    typealias TidesError = EndpointError<Marea.GetTides>
+    typealias LocateStationsError = Marea.StationsError
+    typealias StationError = Marea.StationError
+    typealias TidesError = Marea.TidesError
 
-    private let mareaClient: EndpointInvoking
+    private enum Constant {
+        static let apiToken = "a29026b6-f2ce-4143-b2de-ee566fbfd3cb"
+    }
+
+    private let marea: MareaClient
 
     private let shouldReturnBundledData: Bool
 
-    init(mareaClient: EndpointInvoking = Marea.makeClient(), shouldReturnBundledData: Bool = false) {
-        self.mareaClient = mareaClient
+    init(
+        marea: MareaClient = MareaClient(token: Constant.apiToken),
+        shouldReturnBundledData: Bool = false
+    ) {
+        self.marea = marea
         self.shouldReturnBundledData = shouldReturnBundledData
     }
 
     func locateStations(from coordinate: Coordinate) async throws -> [StationSummary] {
         let stationsList: Marea.ListStations.Success
-        if shouldReturnBundledData, let bundledStationsList = try Marea.bundledStationsList {
+        if shouldReturnBundledData, let bundledStationsList = try Bundle.main.stationsList {
             stationsList = bundledStationsList
         } else {
-            stationsList = try await mareaClient.invoke(endpoint: Marea.ListStations())
+            stationsList = try await marea.stations
         }
 
         return stationsList
@@ -35,10 +43,10 @@ class MareaTidesService: TidesService {
 
     func station(for id: String) async throws -> Station {
         let station: Marea.GetStation.Success
-        if shouldReturnBundledData, let bundledStation = try Marea.bundledStation {
+        if shouldReturnBundledData, let bundledStation = try Bundle.main.station {
             station = bundledStation
         } else {
-            station = try await mareaClient.invoke(endpoint: Marea.GetStation(id: id))
+            station = try await marea.station(for: id)
         }
 
         return Station(from: station)
@@ -46,7 +54,7 @@ class MareaTidesService: TidesService {
 
     func tides(for stationId: String) async throws -> Tides {
         let tides: Marea.GetTides.Success
-        if shouldReturnBundledData, let bundledTides = try Marea.bundledTidesForStation {
+        if shouldReturnBundledData, let bundledTides = try Bundle.main.tidesForStation {
             tides = bundledTides
         } else {
             let startOfTodayDate = Calendar.current.startOfDay(for: Date())
@@ -58,12 +66,11 @@ class MareaTidesService: TidesService {
             let startTime = UInt(startOfDate.timeIntervalSince1970)
             let sevenDays: UInt = 10080
 
-            let getTidesEndpoint = Marea.GetTides(
+            tides = try await marea.tides(
                 duration: sevenDays,
                 timestamp: startTime,
                 stationId: stationId
             )
-            tides = try await mareaClient.invoke(endpoint: getTidesEndpoint)
         }
 
         return Tides(from: tides)
@@ -73,24 +80,24 @@ class MareaTidesService: TidesService {
 // MARK: -
 
 private extension StationSummary {
-    init(from success: Marea.ListStations.Success.Element, coordinate: Coordinate) {
-        let distance = success.distance(from: coordinate)
-        self.init(id: success.id, name: success.name, distance: distance)
+    init(from stationListing: Marea.StationListing, coordinate: Coordinate) {
+        let distance = stationListing.distance(from: coordinate)
+        self.init(id: stationListing.id, name: stationListing.name, distance: distance)
     }
 }
 
 private extension Station {
-    init(from success: Marea.GetStation.Success) {
-        self.init(id: success.id, name: success.name, provider: success.provider)
+    init(from station: Marea.Station) {
+        self.init(id: station.id, name: station.name, provider: station.provider)
     }
 }
 
 private extension Tides {
-    init(from success: Marea.GetTides.Success) {
+    init(from tides: Marea.Tides) {
         let currentDate = Date()
         let timestamp = UInt(currentDate.timeIntervalSince1970)
 
-        let height = zip(success.heights, success.heights[1...])
+        let height = zip(tides.heights, tides.heights[1...])
             .first(where: { $0.timestamp <= timestamp && timestamp <= $1.timestamp })
             .map { heights in
                 let m = (heights.1.height - heights.0.height) / Double(heights.1.timestamp - heights.0.timestamp)
@@ -101,19 +108,19 @@ private extension Tides {
 
         self.init(
             date: currentDate,
-            currentHeight: height ?? 0,
-            tides: success.extremes.map { Tide(from: $0) },
-            lat: success.datums.lat,
-            hat: success.datums.hat,
-            unit: success.unit,
-            disclaimer: success.disclaimer,
-            copyright: success.copyright
+            height: height ?? 0,
+            tides: tides.extremes.map { Tide(from: $0) },
+            lat: tides.datums.lat,
+            hat: tides.datums.hat,
+            unit: tides.unit,
+            disclaimer: tides.disclaimer,
+            copyright: tides.copyright
         )
     }
 }
 
 private extension Tides.Tide {
-    init(from extreme: Marea.GetTides.Success.Extreme) {
+    init(from extreme: Marea.Tides.Extreme) {
         self.init(
             position: Position(from: extreme.state),
             date: Date(timeIntervalSince1970: TimeInterval(extreme.timestamp)),
@@ -123,7 +130,7 @@ private extension Tides.Tide {
 }
 
 private extension Tides.Tide.Position {
-    init(from state: Marea.GetTides.Success.Extreme.State) {
+    init(from state: Marea.Tides.Extreme.State) {
         switch state {
         case .lowTide:
             self = .low
@@ -137,7 +144,7 @@ private extension Tides.Tide.Position {
 
 import CoreLocation
 
-private extension Marea.ListStations.Element {
+private extension StationListing {
     func distance(from coordinate: Coordinate) -> Double {
         CLLocation(latitude: latitude, longitude: longitude).distance(
             from: CLLocation(coordinate: coordinate)

@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import Marea
 
 @MainActor
 enum Preview {
@@ -68,8 +69,8 @@ extension Preview {
 
     static let presentableError = PresentableError(endpointError)
 
-    static let endpointError = MareaTidesService.LocateStationsError.statusCodeIsFailure(
+    static let endpointError = StationsError.statusCodeIsFailure(
         500,
-        error: Marea.Error(error: "Marea API is down", status: 500)
+        error: Marea.Error(message: "Marea API is down", statusCode: 500)
     )
 }
