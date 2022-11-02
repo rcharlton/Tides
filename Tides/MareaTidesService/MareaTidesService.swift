@@ -21,7 +21,7 @@ class MareaTidesService: TidesService {
     private let shouldReturnBundledData: Bool
 
     init(
-        marea: MareaClient = MareaClient(token: Constant.apiToken),
+        marea: MareaClient = makeMareaClient(token: Constant.apiToken),
         shouldReturnBundledData: Bool = false
     ) {
         self.marea = marea
