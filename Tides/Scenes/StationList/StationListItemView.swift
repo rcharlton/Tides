@@ -10,7 +10,7 @@ struct StationListItemView: View {
         $0.maximumFractionDigits = 1
     }
 
-    let station: StationSummary
+    let station: StationListing
 
     var body: some View {
         HStack {
@@ -30,7 +30,7 @@ struct StationListItemView: View {
 
 struct StationListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        List(Preview.stationSummaries) {
+        List(Preview.stationList) {
             StationListItemView(station: $0)
         }
         .listStyle(.plain)

@@ -11,7 +11,7 @@
 		0011AAAA290452D300A34D50 /* Marea in Frameworks */ = {isa = PBXBuildFile; productRef = 0011AAA9290452D300A34D50 /* Marea */; };
 		00274BA228F6D38400EC2D91 /* TidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA128F6D38400EC2D91 /* TidesView.swift */; };
 		00274BA428F6D7A500EC2D91 /* StationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA328F6D7A500EC2D91 /* StationListView.swift */; };
-		00274BA628F7142B00EC2D91 /* StationSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA528F7142B00EC2D91 /* StationSummary.swift */; };
+		00274BA628F7142B00EC2D91 /* StationListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA528F7142B00EC2D91 /* StationListing.swift */; };
 		00274BA928F714A900EC2D91 /* TidesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BA828F714A900EC2D91 /* TidesService.swift */; };
 		00274BAB28F7151300EC2D91 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BAA28F7151300EC2D91 /* Coordinate.swift */; };
 		00274BAD28F7160600EC2D91 /* MareaTidesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00274BAC28F7160600EC2D91 /* MareaTidesService.swift */; };
@@ -62,7 +62,7 @@
 		0011AAAB2904548F00A34D50 /* Marea */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Marea; path = ../../Marea; sourceTree = "<group>"; };
 		00274BA128F6D38400EC2D91 /* TidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesView.swift; sourceTree = "<group>"; };
 		00274BA328F6D7A500EC2D91 /* StationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListView.swift; sourceTree = "<group>"; };
-		00274BA528F7142B00EC2D91 /* StationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSummary.swift; sourceTree = "<group>"; };
+		00274BA528F7142B00EC2D91 /* StationListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListing.swift; sourceTree = "<group>"; };
 		00274BA828F714A900EC2D91 /* TidesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesService.swift; sourceTree = "<group>"; };
 		00274BAA28F7151300EC2D91 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		00274BAC28F7160600EC2D91 /* MareaTidesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MareaTidesService.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 			children = (
 				00274BAA28F7151300EC2D91 /* Coordinate.swift */,
 				00E2D5B328F85B6E00739737 /* Station.swift */,
-				00274BA528F7142B00EC2D91 /* StationSummary.swift */,
+				00274BA528F7142B00EC2D91 /* StationListing.swift */,
 				0058196C28FF0A7F0060597D /* Tides.swift */,
 			);
 			path = Models;
@@ -423,7 +423,7 @@
 				007192F529002B650069B665 /* TidesViewFactory.swift in Sources */,
 				00E2D5BB28F9C92C00739737 /* StationListViewModel.swift in Sources */,
 				00274BA928F714A900EC2D91 /* TidesService.swift in Sources */,
-				00274BA628F7142B00EC2D91 /* StationSummary.swift in Sources */,
+				00274BA628F7142B00EC2D91 /* StationListing.swift in Sources */,
 				0058196D28FF0A7F0060597D /* Tides.swift in Sources */,
 				0060009F28DF69EC00B1CCD5 /* TidesApp.swift in Sources */,
 				00274BA228F6D38400EC2D91 /* TidesView.swift in Sources */,

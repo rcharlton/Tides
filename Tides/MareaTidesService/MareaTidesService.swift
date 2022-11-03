@@ -28,7 +28,7 @@ class MareaTidesService: TidesService {
         self.shouldReturnBundledData = shouldReturnBundledData
     }
 
-    func locateStations(from coordinate: Coordinate) async throws -> [StationSummary] {
+    func listStations(around coordinate: Coordinate) async throws -> [StationListing] {
         let stationsList: Marea.ListStations.Success
         if shouldReturnBundledData, let bundledStationsList = try Bundle.main.stationsList {
             stationsList = bundledStationsList
@@ -37,7 +37,7 @@ class MareaTidesService: TidesService {
         }
 
         return stationsList
-            .map { StationSummary(from: $0, coordinate: coordinate) }
+            .map { StationListing(from: $0, coordinate: coordinate) }
             .sorted { $0.distance < $1.distance }
     }
 
@@ -79,7 +79,7 @@ class MareaTidesService: TidesService {
 
 // MARK: -
 
-private extension StationSummary {
+private extension StationListing {
     init(from stationListing: Marea.StationListing, coordinate: Coordinate) {
         let distance = stationListing.distance(from: coordinate)
         self.init(id: stationListing.id, name: stationListing.name, distance: distance)
@@ -144,7 +144,7 @@ private extension Tides.Tide.Position {
 
 import CoreLocation
 
-private extension StationListing {
+private extension Marea.StationListing {
     func distance(from coordinate: Coordinate) -> Double {
         CLLocation(latitude: latitude, longitude: longitude).distance(
             from: CLLocation(coordinate: coordinate)

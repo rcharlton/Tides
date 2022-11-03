@@ -5,7 +5,7 @@
 typealias TidesService = StationLocating & StationProviding & TidesPredictionProviding
 
 protocol StationLocating {
-    func locateStations(from location: Coordinate) async throws -> [StationSummary]
+    func listStations(around location: Coordinate) async throws -> [StationListing]
 }
 
 protocol StationProviding {

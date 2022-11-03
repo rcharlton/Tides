@@ -22,7 +22,7 @@ extension ViewFactory {
 
     func makeStationListView(
         isPresented: Binding<Bool>,
-        station: Binding<Optional<StationSummary>>,
+        station: Binding<Optional<StationListing>>,
         configure closure: (StationListViewModel) -> Void
     ) -> StationListView {
         configure(

@@ -31,10 +31,10 @@ struct TidesPredictionView: View {
 
             let date = dateFormatter.string(from: tides.date)
             let height = numberFormatter.string(from: NSNumber(value: tides.height)) ?? "n/a"
-            Text("\(date) : \(height)\(tides.unit)")
+            Text("Calculated on \(date) : \(height)\(tides.unit)")
 
 
-            ForEach(tides.tides, id: \.date) { tide in
+            List(tides.tides, id: \.date) { tide in
                 HStack {
                     Text(dateFormatter.string(from: tide.date))
                     Text(tide.position.description)
@@ -43,7 +43,10 @@ struct TidesPredictionView: View {
                     Text("\(height)\(tides.unit)")
                 }
                 .font(.body)
+                .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
             }
+            .listStyle(.plain)
+            .listRowSeparator(.hidden)
         }
         .foregroundColor(.black)
     }

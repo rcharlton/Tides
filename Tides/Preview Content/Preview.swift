@@ -24,8 +24,8 @@ extension Preview {
             await Preview.stations[0]
         }
 
-        func locateStations(from location: Coordinate) async throws -> [StationSummary] {
-            await Preview.stationSummaries
+        func listStations(around location: Coordinate) async throws -> [StationListing] {
+            await Preview.stationList
         }
 
         func tides(for stationId: String) async throws -> Tides {
@@ -45,9 +45,9 @@ extension Preview {
         "National Oceanic and Atmospheric Administration (NOAA)"
     }
 
-    static var stationSummaries: [StationSummary] {
+    static var stationList: [StationListing] {
         stations.enumerated().map {
-            StationSummary(id: $0.1.id, name: $0.1.name, distance: Double($0.0 * 10000))
+            StationListing(id: $0.1.id, name: $0.1.name, distance: Double($0.0 * 10000))
         }
     }
 
@@ -55,10 +55,13 @@ extension Preview {
         Tides(
             date: Date(),
             height: 1,
-            tides: [
-                .init(position: .high, date: Date(), height: -1.2345),
-                .init(position: .low, date: Date(timeIntervalSinceNow: 8 * 60 * 60), height: 1.2345)
-            ],
+            tides: (1...10).map { (value: Int) in
+                Tides.Tide(
+                    position: (value % 2) == 0 ? .low : .high,
+                    date: Date(timeIntervalSinceNow: Double(value) * 60 * 60),
+                    height: Double(-1 + (2 * (value % 2))) * 1.2345
+                )
+            },
             lat: -2,
             hat: 2,
             unit: "m",
@@ -66,6 +69,7 @@ extension Preview {
             copyright: "©2021 Marea | Generated using AVISO+ Products. FES2014 was produced by Noveltis, Legos and CLS and distributed by Aviso+, with support from Cnes (https://www.aviso.altimetry.fr/)"
         )
     }
+
 
     static let presentableError = PresentableError(endpointError)
 

@@ -11,7 +11,7 @@ struct StationListView: View {
 
     @Binding var isPresented: Bool
 
-    @Binding var station: StationSummary?
+    @Binding var station: StationListing?
 
     @ObservedObject var viewModel: StationListViewModel
 

@@ -9,14 +9,14 @@ import SwiftUI
 class TidesViewModel: ObservableObject {
     enum ViewState {
         case failed(PresentableError)
-        case loading(StationSummary)
+        case loading(StationListing)
         case ready(Station, Tides)
         case welcome
     }
 
     @Published var viewState: ViewState = .welcome
 
-    @Published var stationSummary: StationSummary? {
+    @Published var stationSummary: StationListing? {
         didSet {
             update()
         }

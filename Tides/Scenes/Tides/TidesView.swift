@@ -67,7 +67,7 @@ struct MainView_Previews: PreviewProvider {
         .previewDisplayName("failure")
 
         Preview.viewFactory.makeTidesView {
-            $0.viewState = .loading(Preview.stationSummaries[0])
+            $0.viewState = .loading(Preview.stationList[0])
         }
         .previewDisplayName("loading")
 

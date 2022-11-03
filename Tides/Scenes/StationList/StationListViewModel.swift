@@ -10,7 +10,7 @@ class StationListViewModel: ObservableObject {
         case empty
         case failed(PresentableError)
         case loading
-        case ready([StationSummary])
+        case ready([StationListing])
     }
 
     @Published var searchText = "" {
@@ -23,7 +23,7 @@ class StationListViewModel: ObservableObject {
 
     @Published var viewState: ViewState = .empty
 
-    private var filteredStations: [StationSummary] {
+    private var filteredStations: [StationListing] {
         searchText.isEmpty
             ? stations
             : stations.filter {
@@ -38,7 +38,7 @@ class StationListViewModel: ObservableObject {
 
     private let stationLocator: StationLocating
 
-    private var stations: [StationSummary] = []
+    private var stations: [StationListing] = []
 
     init(locationProvider: LocationProviding, stationLocator: StationLocating) {
         self.locationProvider = locationProvider
@@ -49,7 +49,7 @@ class StationListViewModel: ObservableObject {
         do {
             viewState = .loading
             let currentLocation = try await locationProvider.currentLocation
-            stations = try await stationLocator.locateStations(from: currentLocation)
+            stations = try await stationLocator.listStations(around: currentLocation)
             viewState = .ready(filteredStations)
         } catch let error as MareaTidesService.LocateStationsError {
             viewState = .failed(PresentableError(error))
