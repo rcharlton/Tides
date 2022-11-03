@@ -19,6 +19,6 @@ final class TidesTests: XCTestCase {
     }
 
     func test() {
-        XCTAssertNoThrow(try Marea.bundledTidesForStation)
+        XCTFail("Add tests")
     }
 }

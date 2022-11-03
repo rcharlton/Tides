@@ -28,7 +28,7 @@ extension PresentableError {
 
         case let .failedToDecodeType(typename, error):
             self.init(
-                message: "Failed to decode \(typename) due to \(error.localizedDescription)",
+                message: "Failed to decode \(typename). \(error.localizedDescription)",
                 actions: [.cancel(action: cancel) ]
             )
 
