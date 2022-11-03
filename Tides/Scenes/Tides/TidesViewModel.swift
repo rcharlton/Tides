@@ -49,12 +49,10 @@ class TidesViewModel: ObservableObject {
                     viewState = .ready(try await station, try await tides)
                 } catch let error as MareaTidesService.LocateStationsError {
                     print(error)
-                    viewState = .failed(PresentableError(error, cancel: cancelAction))
+                    viewState = .failed(PresentableError(error, cancel: cancelAction, retry: retryAction))
                 } catch let error as MareaTidesService.TidesError {
                     print(error)
-                    viewState = .failed(
-                        PresentableError(error, cancel: cancelAction, retry: retryAction)
-                    )
+                    viewState = .failed(PresentableError(error, cancel: cancelAction, retry: retryAction))
                 } catch {
                     print(error)
                     viewState = .failed(

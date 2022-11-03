@@ -10,14 +10,16 @@ extension PresentableError {
 
     init<E: Endpoint>(
         _ error: EndpointError<E>,
-        cancel: @escaping () -> Void = {},
-        retry: @escaping () -> Void = {}
+        cancel: @escaping () -> Void = { },
+        retry: (() -> Void)? = nil
     ) {
+        let retryAction = retry.map { Action.retry(action: $0) }
+
         switch error {
         case let .dataTaskFailedWithError(error):
             self.init(
                 message: "Data task failed with error \(error.localizedDescription)",
-                actions: [.cancel(action: cancel), .retry(action: retry)]
+                actions: [.cancel(action: cancel), retryAction].compactMap { $0 }
             )
 
         case let .endpointIsMisconfigured(endpoint):
@@ -34,7 +36,7 @@ extension PresentableError {
 
         case let .statusCodeIsFailure(statusCode, error):
             let errorMessage = (error as? CustomStringConvertible)?.description ?? ""
-            let retryAction = Self.retryableStatusCodes.contains(statusCode) ? Action.retry(action: retry) : nil
+            let retryAction = Self.retryableStatusCodes.contains(statusCode) ? retryAction : nil
             let actions = [Action.cancel(action: cancel), retryAction].compactMap { $0 }
 
             self.init(
