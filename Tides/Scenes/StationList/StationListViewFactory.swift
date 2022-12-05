@@ -8,20 +8,20 @@ import SwiftUI
 protocol StationListViewFactory {
     func makeStationListView(
         isPresented: Binding<Bool>,
-        station: Binding<Optional<StationListing>>
+        selectedStation: Binding<Optional<StationListing>>
     ) -> AnyView
 }
 
 extension ViewFactory: StationListViewFactory {
     func makeStationListView(
         isPresented: Binding<Bool>,
-        station: Binding<Optional<StationListing>>
+        selectedStation: Binding<Optional<StationListing>>
     ) -> AnyView {
         AnyView(
             StationListView(
                 isPresented: isPresented,
-                station: station,
                 viewModel: StationListViewModel(
+                    selectedStation: selectedStation,
                     locationProvider: locationService,
                     stationLocator: tidesService
                 )

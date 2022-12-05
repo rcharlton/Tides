@@ -3,6 +3,7 @@
 //
 
 import Combine
+import SwiftUI
 
 @MainActor
 class StationListViewModel: ObservableObject {
@@ -10,18 +11,20 @@ class StationListViewModel: ObservableObject {
         case empty
         case failed(PresentableError)
         case loading
-        case ready([StationListing])
+        case ready([StationListing], StationListing?)
     }
 
     @Published var searchText = "" {
         didSet {
             if case .ready = viewState {
-                viewState = .ready(filteredStations)
+                viewState = .ready(filteredStations, selectedStation)
             }
         }
     }
 
     @Published var viewState: ViewState = .empty
+
+    @Binding private var selectedStation: StationListing?
 
     private var filteredStations: [StationListing] {
         searchText.isEmpty
@@ -40,7 +43,12 @@ class StationListViewModel: ObservableObject {
 
     private var stations: [StationListing] = []
 
-    init(locationProvider: LocationProviding, stationLocator: StationLocating) {
+    init(
+        selectedStation: Binding<StationListing?>,
+        locationProvider: LocationProviding,
+        stationLocator: StationLocating
+    ) {
+        self._selectedStation = selectedStation
         self.locationProvider = locationProvider
         self.stationLocator = stationLocator
     }
@@ -50,11 +58,15 @@ class StationListViewModel: ObservableObject {
             viewState = .loading
             let currentLocation = try await locationProvider.currentLocation
             stations = try await stationLocator.listStations(around: currentLocation)
-            viewState = .ready(filteredStations)
+            viewState = .ready(filteredStations, selectedStation)
         } catch let error as MareaTidesService.LocateStationsError {
             viewState = .failed(PresentableError(error))
         } catch {
             viewState = .failed(PresentableError(message: "An unknown failure occured."))
         }
+    }
+
+    func selectStation(_ station: StationListing?) {
+        selectedStation = station
     }
 }

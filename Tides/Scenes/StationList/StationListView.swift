@@ -11,11 +11,9 @@ struct StationListView: View {
 
     @Binding var isPresented: Bool
 
-    @Binding var station: StationListing?
+    @State private var isAlertPresented = true
 
     @ObservedObject var viewModel: StationListViewModel
-
-    @State private var isAlertPresented = true
 
     var body: some View {
         NavigationView {
@@ -48,15 +46,15 @@ struct StationListView: View {
                 .alert(error, isPresented: $isAlertPresented)
 
         case .loading:
-            ProgressView { Text("Loading") }
+            ProgressView { Text("Requesting Locations") }
 
-        case let .ready(filteredStations):
+        case let .ready(filteredStations, selectedStation):
             List(filteredStations) { station in
                 StationListItemView(station: station)
                     .contentShape(Rectangle())
-                    .listRowBackground(self.station == station ? Color.accentColor : .clear)
+                    .listRowBackground(selectedStation == station ? Color.accentColor : .clear)
                     .onTapGesture {
-                        self.station = station
+                        viewModel.selectStation(station)
                         isPresented = false
                     }
             }
@@ -81,21 +79,23 @@ struct StationListView: View {
 struct StationListView_Previews: PreviewProvider {
     static var previews: some View {
         Preview.viewFactory
-            .makeStationListView(isPresented: .ignore, station: .stub(nil))
+            .makeStationListView(isPresented: .ignore, selectedStation: .stub(nil))
             .previewDisplayName("empty")
 
-        Preview.viewFactory.makeStationListView(isPresented: .ignore, station: .stub(nil)) {
+        Preview.viewFactory.makeStationListView(isPresented: .ignore, selectedStation: .stub(nil)) {
             $0.viewState = .loading
         }
         .previewDisplayName("loading")
 
-        Preview.viewFactory.makeStationListView(isPresented: .ignore, station: .stub(nil)) {
+        Preview.viewFactory.makeStationListView(isPresented: .ignore, selectedStation: .stub(nil)) {
             $0.viewState = .failed(Preview.presentableError)
         }
         .previewDisplayName("failed")
 
-
-        Preview.viewFactory.makeStationListView(isPresented: .ignore, station: .stub(nil)) { viewModel in
+        Preview.viewFactory.makeStationListView(
+            isPresented: .ignore,
+            selectedStation: .stub(nil)
+        ) { viewModel in
             viewModel.searchText = "e"
             Task { await viewModel.loadStations() }
         }

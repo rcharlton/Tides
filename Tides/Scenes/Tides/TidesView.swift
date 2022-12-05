@@ -29,7 +29,7 @@ struct TidesView: View {
                 .sheet(isPresented: $isStationListPresented) {
                     viewFactory.makeStationListView(
                         isPresented: $isStationListPresented,
-                        station: $viewModel.stationSummary
+                        selectedStation: $viewModel.selectedStation
                     )
                 }
         }

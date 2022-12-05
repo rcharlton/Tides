@@ -6,7 +6,8 @@ import SwiftUI
 
 extension Binding {
     static func stub(_ value: Value) -> Self {
-        Binding(get: { value }, set: { _ in })
+        var value = value
+        return Binding(get: { value }, set: { value = $0 })
     }
 }
 

@@ -22,14 +22,14 @@ extension ViewFactory {
 
     func makeStationListView(
         isPresented: Binding<Bool>,
-        station: Binding<Optional<StationListing>>,
+        selectedStation: Binding<Optional<StationListing>>,
         configure closure: (StationListViewModel) -> Void
     ) -> StationListView {
         configure(
             StationListView(
                 isPresented: isPresented,
-                station: station,
                 viewModel: StationListViewModel(
+                    selectedStation: selectedStation,
                     locationProvider: locationService,
                     stationLocator: tidesService
                 )

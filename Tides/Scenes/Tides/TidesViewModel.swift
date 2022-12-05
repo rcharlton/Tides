@@ -16,7 +16,7 @@ class TidesViewModel: ObservableObject {
 
     @Published var viewState: ViewState = .welcome
 
-    @Published var stationSummary: StationListing? {
+    @Published var selectedStation: StationListing? {
         didSet {
             update()
         }
@@ -37,15 +37,15 @@ class TidesViewModel: ObservableObject {
         pendingTask?.cancel()
         pendingTask = nil
 
-        if let stationSummary = self.stationSummary {
+        if let selectedStation = self.selectedStation {
             pendingTask = Task {
                 let cancelAction = { self.viewState = .welcome }
                 let retryAction = { self.update() }
 
                 do {
-                    viewState = .loading(stationSummary)
-                    async let station = stationProvider.station(for: stationSummary.id)
-                    async let tides = tidesPredictionProvider.tides(for: stationSummary.id)
+                    viewState = .loading(selectedStation)
+                    async let station = stationProvider.station(for: selectedStation.id)
+                    async let tides = tidesPredictionProvider.tides(for: selectedStation.id)
                     viewState = .ready(try await station, try await tides)
                 } catch let error as MareaTidesService.LocateStationsError {
                     print(error)
