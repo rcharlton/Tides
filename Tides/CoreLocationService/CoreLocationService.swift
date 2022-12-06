@@ -13,8 +13,7 @@ class CoreLocationService: NSObject, LocationService {
     }
 
     private let locationManager = CLLocationManager()
-    private var continuation: CheckedContinuation<CLLocation, Error>?
-    private var shouldRequestLocation = false
+    private var requestLocationContinuation: CheckedContinuation<CLLocation, Error>?
 
     override init() {
         super.init()
@@ -23,10 +22,9 @@ class CoreLocationService: NSObject, LocationService {
 
     private func requestLocation() async throws -> CLLocation {
         try await withCheckedThrowingContinuation {
-            self.continuation = $0
+            self.requestLocationContinuation = $0
 
             if locationManager.authorizationStatus == .notDetermined {
-                shouldRequestLocation = true
                 locationManager.requestWhenInUseAuthorization()
             } else {
                 locationManager.requestLocation()
@@ -37,22 +35,23 @@ class CoreLocationService: NSObject, LocationService {
 
 extension CoreLocationService: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if shouldRequestLocation {
-            shouldRequestLocation = false
+        print(#function, manager.authorizationStatus)
+
+        if requestLocationContinuation != nil {
             manager.requestLocation()
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        guard manager.authorizationStatus != .notDetermined else { return }
-        continuation?.resume(throwing: error)
-        continuation = nil
+        print(#function, error)
+        requestLocationContinuation?.resume(throwing: error)
+        requestLocationContinuation = nil
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            continuation?.resume(returning: location)
-            continuation = nil
+            requestLocationContinuation?.resume(returning: location)
+            requestLocationContinuation = nil
         }
     }
 }
