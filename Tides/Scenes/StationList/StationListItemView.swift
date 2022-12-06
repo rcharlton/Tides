@@ -23,7 +23,7 @@ struct StationListItemView: View {
 
     private static func distanceString(_ distance: Double) -> String {
         let kilometers = distance / 1000
-        let string = Self.numberFormatter.string(from: kilometers as NSNumber).map { $0 + " km" }
+        let string = Self.numberFormatter.string(from: kilometers as NSNumber).map { $0 + " km away" }
         return string ?? "Unknown distance"
     }
 }
