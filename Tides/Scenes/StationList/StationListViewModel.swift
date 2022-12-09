@@ -44,8 +44,6 @@ class StationListViewModel: ObservableObject {
 
     private var stations: [StationListing] = []
 
-    private var subscription: AnyCancellable?
-
     init(
         selectedStation: Binding<StationListing?>,
         locationProvider: LocationProviding,
@@ -56,19 +54,16 @@ class StationListViewModel: ObservableObject {
         self.stationLocator = stationLocator
     }
 
-    /* TODO
-        combineLatest
-            authorization
-                flatMap     ifAuthorized -> currentLocation
-                            else -> nil
-            listStations
-        map to sorted by distance list
-     */
-    private func observeAuthorization() {
+    deinit {
+        print(type(of: self), #function)
+    }
+
+    func resume() {
         typealias StationsError = MareaTidesService.ListStationsError
 
         let locationProvider = self.locationProvider
 
+        // TODO: Can we move this inside LocationProvider?
         let location = locationProvider
             .requestAuthorization()
             .flatMap { status in
@@ -86,6 +81,8 @@ class StationListViewModel: ObservableObject {
         let stations = Future<[StationListing], Error> { [stationLocator] in
             try await stationLocator.listStations()
         }
+
+        // TODO: How to represent location state in the ViewState so UI is meaningful?
 
         let sortedStations = Publishers
             .CombineLatest(location, stations)
@@ -107,7 +104,7 @@ class StationListViewModel: ObservableObject {
 
         let searchText = $searchText.setFailureType(to: Error.self)
 
-        subscription = Publishers
+        let filteredStations = Publishers
             .CombineLatest(searchText, sortedStations)
             .map { (searchText, stations) in
                 searchText.isEmpty
@@ -119,6 +116,8 @@ class StationListViewModel: ObservableObject {
                         ) != nil
                     }
             }
+
+        let viewState = filteredStations
             .map { [weak self] in
                 ViewState.ready($0, self?.selectedStation)
             }
@@ -132,18 +131,15 @@ class StationListViewModel: ObservableObject {
                 return Just(ViewState.failed(presentableError))
             }
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                print("completion:", completion)
-            } receiveValue: { [weak self] in
-                self?.viewState = $0
-            }
-    }
 
-    func loadStations() async {
-        observeAuthorization()
+        viewState.assign(to: &self.$viewState)
     }
 
     func selectStation(_ station: StationListing?) {
         selectedStation = station
+
+        if case let .ready(stations, _) = viewState {
+            viewState = .ready(stations, selectedStation)
+        }
     }
 }

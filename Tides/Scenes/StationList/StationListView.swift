@@ -30,9 +30,9 @@ struct StationListView: View {
             }
             .navigationTitle("Locations")
         }
-        .task {
+        .onAppear {
             guard !isPreview else { return }
-            await viewModel.loadStations()
+            viewModel.resume()
         }
     }
 
@@ -95,9 +95,9 @@ struct StationListView_Previews: PreviewProvider {
         Preview.viewFactory.makeStationListView(
             isPresented: .ignore,
             selectedStation: .stub(nil)
-        ) { viewModel in
-            viewModel.searchText = "e"
-            Task { await viewModel.loadStations() }
+        ) {
+            $0.searchText = "e"
+            $0.resume()
         }
         .previewDisplayName("ready")
     }
