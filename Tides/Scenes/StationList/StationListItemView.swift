@@ -21,9 +21,11 @@ struct StationListItemView: View {
         .frame(height: 50)
     }
 
-    private static func distanceString(_ distance: Double) -> String {
-        let kilometers = distance / 1000
-        let string = Self.numberFormatter.string(from: kilometers as NSNumber).map { $0 + " km away" }
+    private static func distanceString(_ distance: Double?) -> String {
+        let string = distance.flatMap {
+            let kilometers = $0 / 1000
+            return Self.numberFormatter.string(from: kilometers as NSNumber).map { $0 + " km away" }
+        }
         return string ?? "Unknown distance"
     }
 }

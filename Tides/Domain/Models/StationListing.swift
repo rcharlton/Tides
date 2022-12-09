@@ -5,5 +5,6 @@
 struct StationListing: Identifiable, Equatable {
     let id: String
     let name: String
-    let distance: Double
+    let location: Coordinate
+    let distance: Double?
 }

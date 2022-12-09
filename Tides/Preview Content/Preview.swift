@@ -2,6 +2,8 @@
 // Copyright © 2022 Robin Charlton. All rights reserved.
 //
 
+import Combine
+import CoreLocation
 import Foundation
 import Marea
 
@@ -16,12 +18,29 @@ extension Preview {
     )
 
     class PreviewLocationService: LocationService {
+        func requestLocation2() {
+        }
+
         let currentLocation = Coordinate(latitude: 51.4, longitude: 0)
+
+        lazy var location: AnyPublisher<Coordinate?, Never> =
+            Just(currentLocation).eraseToAnyPublisher()
+
+        lazy var authorization: AnyPublisher<CLAuthorizationStatus, Never> =
+            Just(.denied).eraseToAnyPublisher()
+
+        func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never> {
+            Just(.denied).eraseToAnyPublisher()
+        }
     }
 
     class PreviewTidesService: TidesService {
         func station(for id: String) async throws -> Station {
             await Preview.stations[0]
+        }
+
+        func listStations() async throws -> [StationListing] {
+            await Preview.stationList
         }
 
         func listStations(around location: Coordinate) async throws -> [StationListing] {
@@ -35,9 +54,9 @@ extension Preview {
 
     static var stations: [Station] {
         [
-            Station(id: "1", name: "Sheerness", provider: provider),
-            Station(id: "2", name: "Newhaven", provider: provider),
-            Station(id: "3", name: "Portsmouth", provider: provider)
+            Station(id: "1", name: "Sheerness", provider: provider, location: Coordinate(latitude: 0, longitude: 0)),
+            Station(id: "2", name: "Newhaven", provider: provider, location: Coordinate(latitude: 0.5, longitude: 0.5)),
+            Station(id: "3", name: "Portsmouth", provider: provider, location: Coordinate(latitude: 1, longitude: 1))
         ]
     }
 
@@ -47,7 +66,7 @@ extension Preview {
 
     static var stationList: [StationListing] {
         stations.enumerated().map {
-            StationListing(id: $0.1.id, name: $0.1.name, distance: Double($0.0 * 10000))
+            StationListing(id: $0.1.id, name: $0.1.name, location: $0.1.location, distance: Double($0.0 * 10000))
         }
     }
 

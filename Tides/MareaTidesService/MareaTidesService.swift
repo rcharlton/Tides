@@ -8,7 +8,7 @@ import Marea
 
 class MareaTidesService: TidesService {
 
-    typealias LocateStationsError = Marea.StationsError
+    typealias ListStationsError = Marea.StationsError
     typealias StationError = Marea.StationError
     typealias TidesError = Marea.TidesError
 
@@ -28,6 +28,26 @@ class MareaTidesService: TidesService {
         self.shouldReturnBundledData = shouldReturnBundledData
     }
 
+    func listStations() async throws -> [StationListing] {
+        let stationsList: Marea.ListStations.Success
+        if shouldReturnBundledData, let bundledStationsList = try Bundle.main.stationsList {
+            stationsList = bundledStationsList
+        } else {
+            stationsList = try await marea.stations
+        }
+
+        return stationsList
+            .map {
+                StationListing(
+                    id: $0.id,
+                    name: $0.name,
+                    location: Coordinate(latitude: $0.latitude, longitude: $0.longitude),
+                    distance: nil
+                )
+            }
+            .sorted { $0.name < $1.name }
+    }
+
     func listStations(around coordinate: Coordinate) async throws -> [StationListing] {
         let stationsList: Marea.ListStations.Success
         if shouldReturnBundledData, let bundledStationsList = try Bundle.main.stationsList {
@@ -38,7 +58,7 @@ class MareaTidesService: TidesService {
 
         return stationsList
             .map { StationListing(from: $0, coordinate: coordinate) }
-            .sorted { $0.distance < $1.distance }
+            .sorted { ($0.distance ?? .infinity) < ($1.distance ?? .infinity) }
     }
 
     func station(for id: String) async throws -> Station {
@@ -82,13 +102,23 @@ class MareaTidesService: TidesService {
 private extension StationListing {
     init(from stationListing: Marea.StationListing, coordinate: Coordinate) {
         let distance = stationListing.distance(from: coordinate)
-        self.init(id: stationListing.id, name: stationListing.name, distance: distance)
+        self.init(
+            id: stationListing.id,
+            name: stationListing.name,
+            location: Coordinate(latitude: stationListing.latitude, longitude: stationListing.longitude),
+            distance: distance
+        )
     }
 }
 
 private extension Station {
     init(from station: Marea.Station) {
-        self.init(id: station.id, name: station.name, provider: station.provider)
+        self.init(
+            id: station.id,
+            name: station.name,
+            provider: station.provider,
+            location: Coordinate(latitude: station.latitude, longitude: station.longitude)
+        )
     }
 }
 
@@ -147,19 +177,24 @@ import CoreLocation
 private extension Marea.StationListing {
     func distance(from coordinate: Coordinate) -> Double {
         CLLocation(latitude: latitude, longitude: longitude).distance(
-            from: CLLocation(coordinate: coordinate)
+            from: CLLocation(with: coordinate)
         )
     }
 }
 
 extension Coordinate {
-    init(coordinate: CLLocationCoordinate2D ) {
+    init(with coordinate: CLLocationCoordinate2D ) {
         self.init(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+
+    func distance(from coordinate: Coordinate) -> Double {
+        let result = CLLocation(with: self).distance(from: CLLocation(with: coordinate))
+        return result
     }
 }
 
 extension CLLocation {
-    convenience init(coordinate: Coordinate) {
+    convenience init(with coordinate: Coordinate) {
         self.init(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
 }

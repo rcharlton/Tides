@@ -6,4 +6,5 @@ struct Station: Identifiable, Equatable {
     let id: String
     let name: String
     let provider: String
+    let location: Coordinate
 }

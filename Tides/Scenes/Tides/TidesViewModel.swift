@@ -47,7 +47,7 @@ class TidesViewModel: ObservableObject {
                     async let station = stationProvider.station(for: selectedStation.id)
                     async let tides = tidesPredictionProvider.tides(for: selectedStation.id)
                     viewState = .ready(try await station, try await tides)
-                } catch let error as MareaTidesService.LocateStationsError {
+                } catch let error as MareaTidesService.ListStationsError {
                     print(error)
                     viewState = .failed(PresentableError(error, cancel: cancelAction, retry: retryAction))
                 } catch let error as MareaTidesService.TidesError {
