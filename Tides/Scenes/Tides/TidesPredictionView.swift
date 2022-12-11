@@ -48,7 +48,6 @@ struct TidesPredictionView: View {
             .listStyle(.plain)
             .listRowSeparator(.hidden)
         }
-        .foregroundColor(.black)
     }
 }
 

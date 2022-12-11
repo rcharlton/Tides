@@ -13,6 +13,8 @@ struct StationListView: View {
 
     @State private var isAlertPresented = true
 
+    @State private var selectedStation: StationListing?
+
     @ObservedObject var viewModel: StationListViewModel
 
     var body: some View {
@@ -48,18 +50,25 @@ struct StationListView: View {
         case .loading:
             ProgressView { Text("Requesting Locations") }
 
-        case let .ready(filteredStations, selectedStation):
-            List(filteredStations) { station in
-                StationListItemView(station: station)
-                    .contentShape(Rectangle())
-                    .listRowBackground(selectedStation == station ? Color.accentColor : .clear)
-                    .onTapGesture {
-                        viewModel.selectStation(station)
-                        isPresented = false
-                    }
+        case let .ready(state):
+            VStack {
+//                unwrap(state.message) { Text($0) }
+
+                Text(state.message ?? "Nearest stations")
+                
+                List(state.stations) { station in
+                    StationListItemView(station: station)
+                        .contentShape(Rectangle())
+                        .listRowBackground(selectedStation == station ? Color.accentColor : .clear)
+                        .onTapGesture {
+                            selectedStation = station
+                            viewModel.selectStation(station)
+                            isPresented = false
+                        }
+                }
+                .listStyle(.plain)
+                .searchable(text: $viewModel.searchText, prompt: "Search")
             }
-            .listStyle(.plain)
-            .searchable(text: $viewModel.searchText, prompt: "Search")
         }
     }
 }
@@ -101,4 +110,8 @@ struct StationListView_Previews: PreviewProvider {
         }
         .previewDisplayName("ready")
     }
+}
+
+protocol ViewModel: ObservableObject {
+    associatedtype ViewState
 }

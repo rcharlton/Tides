@@ -15,4 +15,15 @@ extension View {
             self
         }
     }
+
+    @ViewBuilder func unwrap<Content: View, Wrapped>(
+        _ optional: Optional<Wrapped>,
+        transform: (Wrapped) -> Content
+    ) -> some View {
+        if let wrapped = optional {
+            transform(wrapped)
+        } else {
+            EmptyView()
+        }
+    }
 }

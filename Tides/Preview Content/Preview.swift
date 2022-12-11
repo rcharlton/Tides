@@ -18,19 +18,18 @@ extension Preview {
     )
 
     class PreviewLocationService: LocationService {
-        func requestLocation2() {
+        lazy var authorizationStatus: AnyPublisher<CLAuthorizationStatus, Never> =
+            Just(.denied).eraseToAnyPublisher()
+
+        lazy var location: AnyPublisher<Coordinate?, Swift.Error> =
+            Just(Coordinate(latitude: 51.4, longitude: 0))
+                .setFailureType(to: Swift.Error.self)
+                .eraseToAnyPublisher()
+
+        func requestAuthorizationIfNotDetermined() {
         }
 
-        let currentLocation = Coordinate(latitude: 51.4, longitude: 0)
-
-        lazy var location: AnyPublisher<Coordinate?, Never> =
-            Just(currentLocation).eraseToAnyPublisher()
-
-        lazy var authorization: AnyPublisher<CLAuthorizationStatus, Never> =
-            Just(.denied).eraseToAnyPublisher()
-
-        func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never> {
-            Just(.denied).eraseToAnyPublisher()
+        func requestLocation() {
         }
     }
 

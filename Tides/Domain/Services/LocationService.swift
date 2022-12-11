@@ -8,13 +8,11 @@ import CoreLocation
 typealias LocationService = LocationProviding
 
 protocol LocationProviding {
-    var currentLocation: Coordinate { get async throws }
+    var authorizationStatus: AnyPublisher<CLAuthorizationStatus, Never> { get }
 
-    var authorization: AnyPublisher<CLAuthorizationStatus, Never> { get }
+    var location: AnyPublisher<Coordinate?, Error> { get }
 
-    var location: AnyPublisher<Coordinate?, Never> { get }
+    func requestAuthorizationIfNotDetermined()
 
-    func requestLocation2()
-    
-    func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never>
+    func requestLocation()
 }

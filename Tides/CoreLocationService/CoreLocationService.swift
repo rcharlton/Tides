@@ -6,80 +6,56 @@ import Combine
 import CoreLocation
 
 class CoreLocationService: NSObject, LocationService {
-    var currentLocation: Coordinate {
-        get async throws {
-            let location = try await requestLocation()
-            return Coordinate(with: location.coordinate)
-        }
-    }
+    private(set) lazy var authorizationStatus: AnyPublisher<CLAuthorizationStatus, Never> =
+        $authorizationStatusSubject.eraseToAnyPublisher()
 
-    lazy var authorization: AnyPublisher<CLAuthorizationStatus, Never> =
-        $authorizationSubject.eraseToAnyPublisher()
+    private(set) lazy var location: AnyPublisher<Coordinate?, Error> = locationSubject.eraseToAnyPublisher()
 
-    lazy var location: AnyPublisher<Coordinate?, Never> =
-        $locationSubject.eraseToAnyPublisher()
+    @Published private var authorizationStatusSubject = CLAuthorizationStatus.notDetermined
 
-    @Published private var authorizationSubject = CLAuthorizationStatus.notDetermined
-
-    @Published private var locationSubject: Coordinate? = nil
+    private let locationSubject = CurrentValueSubject<Coordinate?, Error>(nil)
 
     private let locationManager = CLLocationManager()
-
-    private var requestLocationContinuation: CheckedContinuation<CLLocation, Error>?
 
     override init() {
         super.init()
         locationManager.delegate = self
     }
 
-    func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never> {
-        if authorizationSubject == .notDetermined {
+    func requestAuthorizationIfNotDetermined() {
+        if authorizationStatusSubject == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
-        return $authorizationSubject.eraseToAnyPublisher()
     }
 
-    func requestLocation2() {
+    func requestLocation() {
         locationManager.requestLocation()
-    }
-
-    private func requestLocation() async throws -> CLLocation {
-        try await withCheckedThrowingContinuation {
-            self.requestLocationContinuation = $0
-
-            if locationManager.authorizationStatus == .notDetermined {
-                locationManager.requestWhenInUseAuthorization()
-            } else {
-                locationManager.requestLocation()
-            }
-        }
     }
 }
 
 extension CoreLocationService: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function, manager.authorizationStatus)
+        authorizationStatusSubject = manager.authorizationStatus
 
-        authorizationSubject = manager.authorizationStatus
-
-        if requestLocationContinuation != nil {
-            manager.requestLocation()
+        if !manager.authorizationStatus.isAuthorized {
+            locationSubject.value = nil
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#function, error)
-        requestLocationContinuation?.resume(throwing: error)
-        requestLocationContinuation = nil
+        locationSubject.send(completion: .failure(error))
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(#function, locations)
-        locations.forEach { locationSubject = Coordinate(with: $0.coordinate) }
+        locations.forEach { locationSubject.value = Coordinate(with: $0.coordinate) }
+    }
+}
 
-        if let location = locations.last {
-            requestLocationContinuation?.resume(returning: location)
-            requestLocationContinuation = nil
-        }
+private extension CLAuthorizationStatus {
+    var isAuthorized: Bool {
+        [.authorizedAlways, .authorizedWhenInUse].contains(self)
     }
 }
