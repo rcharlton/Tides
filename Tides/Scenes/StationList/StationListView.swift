@@ -52,10 +52,11 @@ struct StationListView: View {
 
         case let .ready(state):
             VStack {
-//                unwrap(state.message) { Text($0) }
+                if let prompt = state.authorizationPrompt {
+                    LocationAuthorizationView(message: prompt.message, action: prompt.action)
+                        .padding(20)
+                }
 
-                Text(state.message ?? "Nearest stations")
-                
                 List(state.stations) { station in
                     StationListItemView(station: station)
                         .contentShape(Rectangle())

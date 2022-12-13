@@ -3,16 +3,15 @@
 //
 
 import Combine
-import CoreLocation
 
 typealias LocationService = LocationProviding
 
 protocol LocationProviding {
-    var authorizationStatus: AnyPublisher<CLAuthorizationStatus, Never> { get }
+    var availability: AnyPublisher<LocationAvailability, Never> { get }
 
     var location: AnyPublisher<Coordinate?, Error> { get }
 
-    func requestAuthorizationIfNotDetermined()
-
+    func requestAuthorization()
+    
     func requestLocation()
 }

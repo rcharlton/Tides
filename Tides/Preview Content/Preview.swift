@@ -17,23 +17,23 @@ extension Preview {
         tidesService: PreviewTidesService()
     )
 
-    class PreviewLocationService: LocationService {
-        lazy var authorizationStatus: AnyPublisher<CLAuthorizationStatus, Never> =
-            Just(.denied).eraseToAnyPublisher()
+    private class PreviewLocationService: LocationService {
+        lazy var availability: AnyPublisher<LocationAvailability, Never> =
+            Just(.undetermined).eraseToAnyPublisher()
 
         lazy var location: AnyPublisher<Coordinate?, Swift.Error> =
             Just(Coordinate(latitude: 51.4, longitude: 0))
                 .setFailureType(to: Swift.Error.self)
                 .eraseToAnyPublisher()
 
-        func requestAuthorizationIfNotDetermined() {
+        func requestAuthorization() {
         }
 
         func requestLocation() {
         }
     }
 
-    class PreviewTidesService: TidesService {
+    private class PreviewTidesService: TidesService {
         func station(for id: String) async throws -> Station {
             await Preview.stations[0]
         }

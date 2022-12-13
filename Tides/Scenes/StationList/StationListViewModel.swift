@@ -15,12 +15,20 @@ class StationListViewModel: ObservableObject {
         case loading
         case ready(ReadyState)
 
+        struct AuthorizationPrompt {
+            let message: String
+            let action: (() -> Void)?
+        }
+
         struct ReadyState {
-            let message: String?
+            let authorizationPrompt: AuthorizationPrompt?
             let stations: [StationListing]
 
-            init(message: String? = nil, stations: [StationListing] = []) {
-                self.message = message
+            init(
+                authorizationPrompt: AuthorizationPrompt? = nil,
+                stations: [StationListing] = []
+            ) {
+                self.authorizationPrompt = authorizationPrompt
                 self.stations = stations
             }
         }
@@ -32,25 +40,40 @@ class StationListViewModel: ObservableObject {
 
     @Binding private var selectedStation: StationListing?
 
-    // TODO: Replace this with a CTA ViewState with a message and action (title, closure).
-    private var statusMessage: some Publisher<String?, Never> {
+    private var authorizationPrompt: some Publisher<ViewState.AuthorizationPrompt?, Never> {
         let locationProvider = self.locationProvider
 
+        let requestAuthorization = { [locationProvider] in
+            locationProvider.requestAuthorization()
+        }
+
+        let actionMessage = "Turn on Location Services to see your nearest tide stations."
+
         return locationProvider
-            .authorizationStatus
-            .map { (status: CLAuthorizationStatus) -> String? in
-                switch status {
-                case .notDetermined:
-                    return "Use Location Services to find your nearest station"
+            .availability
+            .map { (availability) -> ViewState.AuthorizationPrompt? in
+                switch availability {
+                case .disabled:
+                    return .init("Location Services are disabled in Settings.\n\(actionMessage)")
+                case .undetermined:
+                    return .init(
+                        message: "Authorise Location Services to see your nearest tide stations.",
+                        action: requestAuthorization
+                    )
                 case .restricted:
-                    return "Location Services are unavailable, possibly due to active restrictions such as parental controls being in place."
+                    return .init(
+                        "Location Services are restricted, possibly due to parental controls being in place."
+                    )
                 case .denied:
-                    return "Location Services are unavailable, due to permission being denied, Location Services being disabled in Settings, or Airplane mode being active."
-                case .authorizedAlways, .authorizedWhenInUse:
+                    return .init(
+                        "Location Services are unavailable due to permission being denied or Airplane mode being active.\n\(actionMessage)"
+                    )
+                case .authorized:
+                    // Nasty side-effect!
                     locationProvider.requestLocation()
-                    return nil
-                @unknown default:
-                    return nil
+                    return .init("Your nearest tide stations:")
+                case .unknown:
+                    return .init("Unable to determine the status of Location Services.")
                 }
             }
     }
@@ -102,12 +125,14 @@ class StationListViewModel: ObservableObject {
     }
 
     private var internalViewState: some Publisher<ViewState, Never> {
-        let statusMessage = statusMessage
+        let authorizationPrompt = authorizationPrompt
             .setFailureType(to: Error.self)
 
-        return Publishers
-            .CombineLatest(statusMessage, filteredStations)
-            .map { ViewState.ready(.init(message: $0.0, stations: $0.1)) }
+        let loading = Just(ViewState.loading)
+
+        let readyOrFailed = Publishers
+            .CombineLatest(authorizationPrompt, filteredStations)
+            .map { ViewState.ready(.init(authorizationPrompt: $0.0, stations: $0.1)) }
             .catch {
                 let presentableError: PresentableError
                 if let error = $0 as? MareaTidesService.ListStationsError {
@@ -117,6 +142,8 @@ class StationListViewModel: ObservableObject {
                 }
                 return Just(ViewState.failed(presentableError))
             }
+
+        return Publishers.Merge(loading, readyOrFailed)
     }
 
     private let locationProvider: LocationProviding
@@ -140,12 +167,19 @@ class StationListViewModel: ObservableObject {
     func resume() {
         internalViewState
             .receive(on: DispatchQueue.main)
+            .print()
             .assign(to: &self.$viewState)
-
-        locationProvider.requestAuthorizationIfNotDetermined()
     }
 
     func selectStation(_ station: StationListing?) {
         selectedStation = station
+    }
+}
+
+// MARK: -
+
+extension StationListViewModel.ViewState.AuthorizationPrompt {
+    init(_ message: String) {
+        self.init(message: message, action: nil)
     }
 }

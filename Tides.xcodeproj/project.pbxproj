@@ -35,6 +35,8 @@
 		008E836628F755BB00F0271C /* TouchGestureModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E836528F755BB00F0271C /* TouchGestureModifier.swift */; };
 		00B992D828E4A8CF00D1D61C /* StationListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B992D728E4A8CF00D1D61C /* StationListItemView.swift */; };
 		00B992DA28E5DDD300D1D61C /* v2-stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 00B992D928E5DDD300D1D61C /* v2-stations.json */; };
+		00CB2C75294766CF000CB045 /* LocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CB2C74294766CF000CB045 /* LocationAuthorizationView.swift */; };
+		00CB2C772948E67B000CB045 /* LocationAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CB2C762948E67A000CB045 /* LocationAvailability.swift */; };
 		00E2D5AE28F847F800739737 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2D5AD28F847F800739737 /* LocationService.swift */; };
 		00E2D5B228F85A8C00739737 /* v2-stations-NOAA-9415112.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E2D5B128F85A8C00739737 /* v2-stations-NOAA-9415112.json */; };
 		00E2D5B428F85B6E00739737 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2D5B328F85B6E00739737 /* Station.swift */; };
@@ -91,6 +93,8 @@
 		008E836528F755BB00F0271C /* TouchGestureModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchGestureModifier.swift; sourceTree = "<group>"; };
 		00B992D728E4A8CF00D1D61C /* StationListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationListItemView.swift; sourceTree = "<group>"; };
 		00B992D928E5DDD300D1D61C /* v2-stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "v2-stations.json"; sourceTree = "<group>"; };
+		00CB2C74294766CF000CB045 /* LocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationView.swift; sourceTree = "<group>"; };
+		00CB2C762948E67A000CB045 /* LocationAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAvailability.swift; sourceTree = "<group>"; };
 		00E2D5AD28F847F800739737 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		00E2D5B128F85A8C00739737 /* v2-stations-NOAA-9415112.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "v2-stations-NOAA-9415112.json"; sourceTree = "<group>"; };
 		00E2D5B328F85B6E00739737 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		007192F129002A800069B665 /* StationList */ = {
 			isa = PBXGroup;
 			children = (
+				00CB2C74294766CF000CB045 /* LocationAuthorizationView.swift */,
 				00B992D728E4A8CF00D1D61C /* StationListItemView.swift */,
 				00274BA328F6D7A500EC2D91 /* StationListView.swift */,
 				0058196428FDBB9E0060597D /* StationListViewFactory.swift */,
@@ -275,6 +280,7 @@
 				00E2D5B328F85B6E00739737 /* Station.swift */,
 				00274BA528F7142B00EC2D91 /* StationListing.swift */,
 				0058196C28FF0A7F0060597D /* Tides.swift */,
+				00CB2C762948E67A000CB045 /* LocationAvailability.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -419,6 +425,7 @@
 				00274BAD28F7160600EC2D91 /* MareaTidesService.swift in Sources */,
 				00F70CB428FC338400B4BFF6 /* PresentableError+EndpointError.swift in Sources */,
 				0058196128FC73B40060597D /* TidesViewModel.swift in Sources */,
+				00CB2C75294766CF000CB045 /* LocationAuthorizationView.swift in Sources */,
 				008E2CA228F6CC5800E8A879 /* TidesPredictionView.swift in Sources */,
 				007192F529002B650069B665 /* TidesViewFactory.swift in Sources */,
 				00E2D5BB28F9C92C00739737 /* StationListViewModel.swift in Sources */,
@@ -437,6 +444,7 @@
 				008E836428F7559E00F0271C /* Preview.swift in Sources */,
 				0058196328FDB7E40060597D /* ViewFactory.swift in Sources */,
 				0058196528FDBB9E0060597D /* StationListViewFactory.swift in Sources */,
+				00CB2C772948E67B000CB045 /* LocationAvailability.swift in Sources */,
 				00F70CB628FC372700B4BFF6 /* View+Unwrap.swift in Sources */,
 				0058196B28FEFC8F0060597D /* Binding+Stub.swift in Sources */,
 				00F70CA728FAE4D700B4BFF6 /* View+When.swift in Sources */,
